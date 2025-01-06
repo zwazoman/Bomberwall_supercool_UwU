@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class PlayerMain : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [field : SerializeField]
+    public PlayerInputs Inputs { get; private set; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [field : SerializeField]
+    public PlayerMove Move { get; private set; }
+
+    [field : SerializeField]
+    public BombHandler Bomb { get; private set; }
 }
