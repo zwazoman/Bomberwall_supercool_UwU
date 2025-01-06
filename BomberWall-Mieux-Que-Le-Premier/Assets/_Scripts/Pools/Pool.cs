@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class Pool : MonoBehaviour
 {
@@ -9,17 +11,30 @@ public class Pool : MonoBehaviour
     [SerializeField] GameObject _object;
 
     Queue<GameObject> _pool = new Queue<GameObject>();
-    List<GameObject> __poolContent = new List<GameObject>();
 
-    private void Start()
+    void Start()
     {
         for(int i = 0; i < _poolSize; i++)
         {
-            GameObject poolObject = Instantiate(_object);
-            poolObject.SetActive(false);
-            __poolContent.Add(poolObject);
-            ReturnToPool(poolObject);
+            AddNewObjectToPool();
         }
+    }
+
+    GameObject AddNewObjectToPool()
+    {
+        GameObject pooledObject = Instantiate(_object);
+        PoolObject poolObject;
+        if (_object.TryGetComponent<PoolObject>(out PoolObject pObject))
+        {
+            poolObject = pObject;
+        }
+        else
+        {
+            poolObject = pooledObject.AddComponent<PoolObject>();
+        }
+        poolObject.OriginPool = this;
+        ReturnToPool(pooledObject);
+        return pooledObject;
     }
 
     /// <summary>
@@ -28,11 +43,6 @@ public class Pool : MonoBehaviour
     /// <param name="objectToReturn"></param>
     public void ReturnToPool(GameObject objectToReturn)
     {
-        if (!__poolContent.Contains(objectToReturn))
-        {
-            print("wrong object inserted");
-            return;
-        }
         objectToReturn.SetActive(false);
         _pool.Enqueue(objectToReturn);
     }
@@ -41,16 +51,38 @@ public class Pool : MonoBehaviour
     /// returns an object removed from the pool and activated
     /// </summary>
     /// <returns></returns>
-    public GameObject TakeFromPoolAtPos(Vector2 summonPos)
+    public GameObject TakeFromPool(Vector3 pos, Quaternion rot)
     {
+        GameObject poolObject;
         if (_pool.Count == 0)
         {
-            print("pool empty");
-            return null;
+            poolObject = AddNewObjectToPool();
         }
-        GameObject poolObject = _pool.Dequeue();
+        else
+        {
+            poolObject = _pool.Dequeue();
+        }
+        poolObject.transform.parent = parent;
         poolObject.SetActive(true);
-        poolObject.transform.position = summonPos;
+        poolObject.GetComponent<PoolObject>().PulledFromPool();
         return poolObject;
     }
+
+    public GameObject TakeFromPool(Transform parent)
+    {
+        GameObject poolObject;
+        if (_pool.Count == 0)
+        {
+            poolObject = AddNewObjectToPool();
+        }
+        else
+        {
+            poolObject = _pool.Dequeue();
+        }
+        poolObject.transform.parent = parent;
+        poolObject.SetActive(true);
+        poolObject.GetComponent<PoolObject>().PulledFromPool();
+        return poolObject;
+    }
+
 }

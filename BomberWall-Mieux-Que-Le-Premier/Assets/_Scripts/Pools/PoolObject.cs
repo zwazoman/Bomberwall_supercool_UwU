@@ -10,7 +10,7 @@ public class PoolObject : MonoBehaviour
 
     public Pool OriginPool;
 
-    public void PullFromPool()
+    public void PulledFromPool()
     {
         OnPulledFromPool?.Invoke();
     }
@@ -18,5 +18,6 @@ public class PoolObject : MonoBehaviour
     public void PushBackToPool()
     {
         OnPushedToPool?.Invoke();
+        OriginPool.ReturnToPool(gameObject);
     }
 }
