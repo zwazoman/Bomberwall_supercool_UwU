@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputs : MonoBehaviour
 {
-    public Vector2 MoveVector;
+    [HideInInspector] public Vector2 MoveVector;
 
     private PlayerMain _main;
 
@@ -15,6 +15,10 @@ public class PlayerInputs : MonoBehaviour
         TryGetComponent<PlayerMain>(out _main);
     }
 
+    /// <summary>
+    /// inputs de déplacement du joueur
+    /// </summary>
+    /// <param name="ctx"></param>
     public void OnMove(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
@@ -23,6 +27,10 @@ public class PlayerInputs : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// inputs de coup de pied / de lancé du joueur
+    /// </summary>
+    /// <param name="ctx"></param>
     public void OnKick(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
@@ -31,6 +39,10 @@ public class PlayerInputs : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// input d'équipement / de déposage du joueur
+    /// </summary>
+    /// <param name="ctx"></param>
     public void OnEquip(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
