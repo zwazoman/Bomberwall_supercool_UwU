@@ -62,7 +62,8 @@ public class Pool : MonoBehaviour
         {
             poolObject = _pool.Dequeue();
         }
-        poolObject.transform.parent = parent;
+        poolObject.transform.position = pos;
+        poolObject.transform.rotation = rot;
         poolObject.SetActive(true);
         poolObject.GetComponent<PoolObject>().PulledFromPool();
         return poolObject;
