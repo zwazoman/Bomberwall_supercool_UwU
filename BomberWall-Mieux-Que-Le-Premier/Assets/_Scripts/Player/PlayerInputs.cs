@@ -1,13 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInputs : MonoBehaviour
 {
-    [HideInInspector] public Vector2 MoveVector;
-
     private PlayerMain _main;
 
     private void Awake()
@@ -21,10 +16,7 @@ public class PlayerInputs : MonoBehaviour
     /// <param name="ctx"></param>
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
-        {
-            MoveVector = ctx.ReadValue<Vector2>();
-        }
+        _main.Move.MoveInput = ctx.ReadValue<Vector2>();
     }
 
     /// <summary>
