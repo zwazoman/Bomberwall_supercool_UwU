@@ -5,8 +5,13 @@ using UnityEngine;
 
 public enum Pools
 {
+    Bomb,
+    BombPickup
 }
 
+/// <summary>
+/// Pool Access
+/// </summary>
 public class PoolManager : MonoBehaviour
 {
     //singleton

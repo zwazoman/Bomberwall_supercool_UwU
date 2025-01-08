@@ -2,11 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bomb : MonoBehaviour
+public class Bomb : MonoBehaviour,IPoolable
 {
     [SerializeField] float _lifeTime;
 
-     float _timer = 0;
+    float _timer = 0;
+
+    //Poolable Initiator
+    PoolObject _poolObject;
+    Rigidbody _rb;
+
+    private void Awake()
+    {
+        TryGetComponent<PoolObject>(out _poolObject);
+        TryGetComponent<Rigidbody>(out _rb);
+    }
+
+    private void Start()
+    {
+        _poolObject.OnPulledFromPool += OnPulledFromPool;
+        _poolObject.OnPushedToPool += OnPushedToPull;
+    }
+
+    public void OnPulledFromPool()
+    {
+        throw new System.NotImplementedException();
+    }
+
+
+    public void OnPushedToPull()
+    {
+        _timer = 0;
+    }
+
+    public void ReturnToPool()
+    {
+        //return to pool
+        if (_poolObject == null) Destroy(gameObject); else _poolObject.ReturnToPool();
+    }
+
 
     /// <summary>
     /// gère l'explosion
@@ -26,7 +60,7 @@ public class Bomb : MonoBehaviour
     /// <param name="direction"></param>
     public void Push(Vector3 direction)
     {
-
+        _rb.AddForce(direction,ForceMode.Impulse);
     }
 
     /// <summary>
@@ -34,11 +68,8 @@ public class Bomb : MonoBehaviour
     /// </summary>
     public void Explode()
     {
-
-    }
-
-    private void OnDisable()
-    {
-        _timer = 0;
+        //explosion
+        //juice
+        ReturnToPool();
     }
 }

@@ -20,6 +20,10 @@ public class Pool : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// créé un objet, lui rajoute le componenet PoolObject et le rajoute à la pool
+    /// </summary>
+    /// <returns></returns>
     GameObject AddNewObjectToPool()
     {
         GameObject pooledObject = Instantiate(_object);
@@ -43,6 +47,8 @@ public class Pool : MonoBehaviour
     /// <param name="objectToReturn"></param>
     public void ReturnToPool(GameObject objectToReturn)
     {
+        objectToReturn.transform.parent = transform;
+        objectToReturn.transform.position = Vector3.zero;
         objectToReturn.SetActive(false);
         _pool.Enqueue(objectToReturn);
     }
@@ -69,6 +75,11 @@ public class Pool : MonoBehaviour
         return poolObject;
     }
 
+    /// <summary>
+    /// acces a un objet de la pool (si la pool est vide : une nouvelle instance est créée et rajoutée à la pool
+    /// </summary>
+    /// <param name="parent"></param>
+    /// <returns></returns>
     public GameObject TakeFromPool(Transform parent)
     {
         GameObject poolObject;
