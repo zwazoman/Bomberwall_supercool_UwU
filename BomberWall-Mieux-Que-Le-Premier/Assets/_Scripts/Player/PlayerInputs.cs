@@ -27,7 +27,7 @@ public class PlayerInputs : MonoBehaviour
     {
         if (ctx.performed)
         {
-            _main.Bomb.Kick();
+            _main.Bomb.Hit();
         }
     }
 

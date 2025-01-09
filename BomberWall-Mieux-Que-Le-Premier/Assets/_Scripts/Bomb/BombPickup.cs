@@ -33,7 +33,7 @@ public class BombPickup : MonoBehaviour,IPoolable
     public void ReturnToPool()
     {
         //return to pool
-        if (_poolObject == null) Destroy(gameObject); else _poolObject.ReturnToPool();
+        if (_poolObject == null) Destroy(gameObject); else _poolObject.PushToPool();
     }
 
 

@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
     #region Variables
+    public bool IsMoving;
     [Header("Speed Settings")]
     [Tooltip("Vitesse de base d'un joueur, vitesse conseillée 4")]
     [SerializeField] private float _initialSpeed;
@@ -30,6 +32,10 @@ public class PlayerMove : MonoBehaviour
 
     [HideInInspector] public Vector2 MoveInput;
     #endregion
+
+    public event Action OnStartMoving;
+    public event Action OnStopMoving;
+
 
     private void FixedUpdate()
     {

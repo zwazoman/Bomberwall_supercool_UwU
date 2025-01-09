@@ -41,7 +41,8 @@ public class Bomb : MonoBehaviour,IPoolable
     public void ReturnToPool()
     {
         //return to pool
-        if (_poolObject == null) Destroy(gameObject); else _poolObject.ReturnToPool();
+        print("bomb back in pool");
+        if (_poolObject == null) Destroy(gameObject); else _poolObject.PushToPool();
     }
 
 
@@ -76,7 +77,7 @@ public class Bomb : MonoBehaviour,IPoolable
         {
             if (col.gameObject.TryGetComponent<Damageable>(out Damageable target))
             {
-                target.ApplyDamage();
+                target.ApplyDamage(gameObject);
             }
             else
             {
@@ -84,7 +85,14 @@ public class Bomb : MonoBehaviour,IPoolable
                 col.GetComponent<Bomb>().Push(pushVector.normalized * _explosionPushStrength);
             }
         }
+
         //juice
+
+        if(transform.parent.TryGetComponent<BombHandler>(out BombHandler bombHandler))
+        {
+            bombHandler.BombDropped();
+        }
+
         ReturnToPool();
     }
 
