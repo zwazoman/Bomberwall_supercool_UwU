@@ -1,9 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BombHandler : MonoBehaviour
 {
+    public event Action OnBombEquipped;
+    public event Action OnBombDropped;
+
+    public event Action OnThrow;
+
+    public event Action OnHit;
+
     [Header("Parameters")]
     [SerializeField] float _bombThrowVerticalForce = 1;
     [SerializeField] float _bombThrowHorizontalForce = 1;
@@ -15,8 +23,8 @@ public class BombHandler : MonoBehaviour
     [SerializeField] Transform _bombDropSocket;
     [SerializeField] Transform _kickSocket;
 
-    private bool _bombsEquipped = false;
-    public int _BombsPossessedCount = 0;
+    public bool HasBombsEquipped = false;
+    [SerializeField] int _bombsPossessedCount = 0;
     GameObject _currentBombEquipped;
 
     /// <summary>
@@ -24,7 +32,7 @@ public class BombHandler : MonoBehaviour
     /// </summary>
     public void Pickup()
     {
-        _BombsPossessedCount++;
+        _bombsPossessedCount++;
         //updateUi
         //Juice
     }
@@ -34,20 +42,22 @@ public class BombHandler : MonoBehaviour
     /// </summary>
     public void Equip()
     {
-        if (_bombsEquipped)
+        if (HasBombsEquipped)
         {
             Drop();
             return;
         }
-        if(_BombsPossessedCount > 0)
+        if(_bombsPossessedCount > 0)
         {
-            _BombsPossessedCount--;
-            _bombsEquipped = true;
+            _bombsPossessedCount--;
+            HasBombsEquipped = true;
             GameObject bomb = PoolManager.Instance.AccessPool(Pools.Bomb).TakeFromPool(transform);
             _currentBombEquipped = bomb;
             _currentBombEquipped.GetComponent<Rigidbody>().isKinematic = true;
             _currentBombEquipped.GetComponent<Collider>().enabled = false;
             _currentBombEquipped.transform.position = _bombEquipSocket.position;
+
+            OnBombEquipped?.Invoke();
             //visuels et tout
         }
         else
@@ -60,9 +70,9 @@ public class BombHandler : MonoBehaviour
     /// <summary>
     /// envoie un spherecast devant le joueur et pousse une bombe si elle est touchée
     /// </summary>
-    public void Kick()
+    public void Hit()
     {
-        if (_bombsEquipped)
+        if (HasBombsEquipped)
         {
             Throw();
             return;
@@ -72,8 +82,9 @@ public class BombHandler : MonoBehaviour
         {
             coll.GetComponent<Bomb>().Push(transform.forward * _kickForce);
         }
+
+        OnHit();
         //visuels et tout
-        //overlapsphere pour taper la bombe avec
     }
 
     /// <summary>
@@ -81,12 +92,11 @@ public class BombHandler : MonoBehaviour
     /// </summary>
     public void Drop()
     {
-        _bombsEquipped = false;
+        BombDropped();
         _currentBombEquipped.transform.position = _bombDropSocket.position;
-        _currentBombEquipped.GetComponent<Rigidbody>().isKinematic = false;
-        _currentBombEquipped.GetComponent<Collider>().enabled = true;
-        _currentBombEquipped.transform.parent = null;
         _currentBombEquipped = null;
+
+        BombDropped();
         //visuels et tout
     }
 
@@ -95,13 +105,25 @@ public class BombHandler : MonoBehaviour
     /// </summary>
     public void Throw()
     {
-        _bombsEquipped = false;
-        _currentBombEquipped.GetComponent<Rigidbody>().isKinematic = false;
-        _currentBombEquipped.GetComponent<Collider>().enabled = true;
-        _currentBombEquipped.transform.parent = null;
+        BombDropped();
         Vector3 throwVector = (transform.forward * _bombThrowHorizontalForce) + (Vector3.up * _bombThrowVerticalForce);
         _currentBombEquipped.GetComponent<Bomb>().Push(throwVector);
         _currentBombEquipped = null;
+
+        OnThrow?.Invoke();
+        BombDropped();
         //visuels et tout
     }
+
+    public void BombDropped()
+    {
+        HasBombsEquipped = false;
+        _currentBombEquipped.GetComponent<Rigidbody>().isKinematic = false;
+        _currentBombEquipped.GetComponent<Collider>().enabled = true;
+        _currentBombEquipped.transform.parent = null;
+
+
+        OnBombDropped?.Invoke();
+    }
+
 }

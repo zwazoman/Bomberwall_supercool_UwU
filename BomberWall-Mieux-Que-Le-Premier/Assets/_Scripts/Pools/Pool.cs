@@ -71,7 +71,7 @@ public class Pool : MonoBehaviour
         poolObject.transform.position = pos;
         poolObject.transform.rotation = rot;
         poolObject.SetActive(true);
-        poolObject.GetComponent<PoolObject>().PulledFromPool();
+        poolObject.GetComponent<PoolObject>().PullFromPool();
         return poolObject;
     }
 
@@ -93,7 +93,7 @@ public class Pool : MonoBehaviour
         }
         poolObject.transform.parent = parent;
         poolObject.SetActive(true);
-        poolObject.GetComponent<PoolObject>().PulledFromPool();
+        poolObject.GetComponent<PoolObject>().PullFromPool();
         return poolObject;
     }
 

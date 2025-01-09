@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class Damageable : MonoBehaviour
 {
-    public event Action OnTakeDamage;
+    public event Action<GameObject> OnTakeDamage;
 
-    public void ApplyDamage()
+    public void ApplyDamage(GameObject killer)
     {
-        OnTakeDamage?.Invoke();
+        OnTakeDamage?.Invoke(killer);
     }
 }

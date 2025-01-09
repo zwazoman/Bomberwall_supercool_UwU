@@ -13,17 +13,12 @@ public class PoolObject : MonoBehaviour
 
     public Pool OriginPool;
 
-    public void ReturnToPool()
-    {
-        OriginPool.ReturnToPool(gameObject);
-    }
-
-    public void PulledFromPool()
+    public void PullFromPool()
     {
         OnPulledFromPool?.Invoke();
     }
 
-    public void PushedToPull()
+    public void PushToPool()
     {
         OnPushedToPool?.Invoke();
         OriginPool.ReturnToPool(gameObject);
