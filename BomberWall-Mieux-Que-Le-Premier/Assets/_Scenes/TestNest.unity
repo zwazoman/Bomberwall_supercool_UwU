@@ -451,21 +451,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlAyEr
       objectReference: {fileID: 0}
-    - target: {fileID: 2890810434299630216, guid: f3902d18980e7314eb42f79fbfdfb06c,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3882634052787109187, guid: f3902d18980e7314eb42f79fbfdfb06c,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.291
-      objectReference: {fileID: 0}
-    - target: {fileID: 3882634052787109187, guid: f3902d18980e7314eb42f79fbfdfb06c,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.944
-      objectReference: {fileID: 0}
     - target: {fileID: 4348736551549099284, guid: f3902d18980e7314eb42f79fbfdfb06c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -515,16 +500,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5556603900036884151, guid: f3902d18980e7314eb42f79fbfdfb06c,
-        type: 3}
-      propertyPath: m_Name
-      value: Bomb Equip Socket
-      objectReference: {fileID: 0}
-    - target: {fileID: 6890952419694699457, guid: f3902d18980e7314eb42f79fbfdfb06c,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.34
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
