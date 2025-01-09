@@ -45,7 +45,7 @@ public class BombHandler : MonoBehaviour
             _bombsEquipped = true;
             GameObject bomb = PoolManager.Instance.AccessPool(Pools.Bomb).TakeFromPool(transform);
             _currentBombEquipped = bomb;
-            _currentBombEquipped.GetComponent<Rigidbody>().useGravity = false;
+            _currentBombEquipped.GetComponent<Rigidbody>().isKinematic = true;
             _currentBombEquipped.GetComponent<Collider>().enabled = false;
             _currentBombEquipped.transform.position = _bombEquipSocket.position;
             //visuels et tout
@@ -83,8 +83,9 @@ public class BombHandler : MonoBehaviour
     {
         _bombsEquipped = false;
         _currentBombEquipped.transform.position = _bombDropSocket.position;
-        _currentBombEquipped.GetComponent<Rigidbody>().useGravity = true;
+        _currentBombEquipped.GetComponent<Rigidbody>().isKinematic = false;
         _currentBombEquipped.GetComponent<Collider>().enabled = true;
+        _currentBombEquipped.transform.parent = null;
         _currentBombEquipped = null;
         //visuels et tout
     }
@@ -95,16 +96,12 @@ public class BombHandler : MonoBehaviour
     public void Throw()
     {
         _bombsEquipped = false;
-        _currentBombEquipped.GetComponent<Rigidbody>().useGravity = true;
+        _currentBombEquipped.GetComponent<Rigidbody>().isKinematic = false;
         _currentBombEquipped.GetComponent<Collider>().enabled = true;
+        _currentBombEquipped.transform.parent = null;
         Vector3 throwVector = (transform.forward * _bombThrowHorizontalForce) + (Vector3.up * _bombThrowVerticalForce);
         _currentBombEquipped.GetComponent<Bomb>().Push(throwVector);
         _currentBombEquipped = null;
         //visuels et tout
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(_kickSocket.position,_kickZoneSize);
     }
 }
