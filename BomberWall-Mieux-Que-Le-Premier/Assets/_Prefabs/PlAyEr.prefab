@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7488441892604067622}
   - component: {fileID: 1271569658401742290}
   - component: {fileID: 4202521946977047375}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlAyEr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,9 +160,9 @@ MonoBehaviour:
   _maxSpeed: 7
   _timeToReachMaxSpeed: 3
   _decelerationDelay: 30
-  _rotationSpeed: 10
-  MoveInput: {x: 0, y: 0}
+  _rotationSpeed: 25
   _rb: {fileID: 4202521946977047375}
+  MoveInput: {x: 0, y: 0}
 --- !u!114 &7488441892604067622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,7 +338,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3882634052787109187}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Kick Socket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +369,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2816937455646883731}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bomb Equip Socket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -400,7 +400,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6890952419694699457}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bomb Drop Socket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -433,7 +433,7 @@ GameObject:
   - component: {fileID: 5184582166534579800}
   - component: {fileID: 7961236162819680984}
   - component: {fileID: 5531103857850248897}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
