@@ -6,6 +6,8 @@ public class Bomb : MonoBehaviour,IPoolable
 {
     [SerializeField] float _lifeTime;
     [SerializeField] float _explosionRadius = 1;
+    [SerializeField] LayerMask _explosionMask;
+    [SerializeField] float _explosionPushStrength = 1;
 
     float _timer = 0;
 
@@ -69,12 +71,17 @@ public class Bomb : MonoBehaviour,IPoolable
     /// </summary>
     public void Explode()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, _explosionRadius, LayerMask.GetMask("Player"));
+        Collider[] hits = Physics.OverlapSphere(transform.position, _explosionRadius, _explosionMask);
         foreach (Collider col in hits)
         {
             if (col.gameObject.TryGetComponent<Damageable>(out Damageable target))
             {
                 target.ApplyDamage();
+            }
+            else
+            {
+                Vector3 pushVector = col.transform.position - transform.position;
+                col.GetComponent<Bomb>().Push(pushVector.normalized * _explosionPushStrength);
             }
         }
         //juice

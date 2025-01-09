@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 6732974422645644759}
   - component: {fileID: 3344114572759111046}
   - component: {fileID: 1296495553150084129}
+  - component: {fileID: 3040865153507450744}
+  - component: {fileID: 6211209527397777474}
   - component: {fileID: 5014596802907730576}
   - component: {fileID: 2890810434299630216}
   - component: {fileID: 7488441892604067622}
@@ -132,6 +134,31 @@ MonoBehaviour:
   <Inputs>k__BackingField: {fileID: 5014596802907730576}
   <Move>k__BackingField: {fileID: 2890810434299630216}
   <Bomb>k__BackingField: {fileID: 7488441892604067622}
+--- !u!114 &3040865153507450744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2319394959383672701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d56cdb66c56dc2e4994652dce1892f57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 3
+--- !u!114 &6211209527397777474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2319394959383672701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db65686be0f08704ba9ae551973bfe12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5014596802907730576
 MonoBehaviour:
   m_ObjectHideFlags: 0
