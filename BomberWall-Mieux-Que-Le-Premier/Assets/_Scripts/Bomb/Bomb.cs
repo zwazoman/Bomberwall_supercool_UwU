@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bomb : MonoBehaviour,IPoolable
 {
     [SerializeField] float _lifeTime;
+    [SerializeField] float _explosionRadius = 1;
 
     float _timer = 0;
 
@@ -68,8 +69,20 @@ public class Bomb : MonoBehaviour,IPoolable
     /// </summary>
     public void Explode()
     {
-        //explosion
+        Collider[] hits = Physics.OverlapSphere(transform.position, _explosionRadius, LayerMask.GetMask("Player"));
+        foreach (Collider col in hits)
+        {
+            if (col.gameObject.TryGetComponent<Damageable>(out Damageable target))
+            {
+                target.ApplyDamage();
+            }
+        }
         //juice
         ReturnToPool();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, _explosionRadius);
     }
 }
