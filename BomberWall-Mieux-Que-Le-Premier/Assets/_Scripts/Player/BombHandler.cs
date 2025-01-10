@@ -96,7 +96,6 @@ public class BombHandler : MonoBehaviour
         _currentBombEquipped.transform.position = _bombDropSocket.position;
         _currentBombEquipped = null;
 
-        BombDropped();
         //visuels et tout
     }
 
@@ -111,7 +110,6 @@ public class BombHandler : MonoBehaviour
         _currentBombEquipped = null;
 
         OnThrow?.Invoke();
-        BombDropped();
         //visuels et tout
     }
 
