@@ -83,7 +83,7 @@ public class BombHandler : MonoBehaviour
             coll.GetComponent<Bomb>().Push(transform.forward * _kickForce);
         }
 
-        OnHit();
+        OnHit?.Invoke();
         //visuels et tout
     }
 
