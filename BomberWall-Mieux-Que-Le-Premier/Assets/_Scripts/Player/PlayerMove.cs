@@ -52,6 +52,8 @@ public class PlayerMove : MonoBehaviour
     {
         if (MoveInput.sqrMagnitude > 0.01f) //accélération
         {
+            OnStartMoving?.Invoke();
+            IsMoving = true;
             _moveDirection = new Vector3(MoveInput.x, 0, MoveInput.y).normalized;
             _accelerationTimer += Time.fixedDeltaTime;
             float accelerationDelay = Mathf.Clamp01(_accelerationTimer / _timeToReachMaxSpeed);
@@ -65,6 +67,12 @@ public class PlayerMove : MonoBehaviour
 
         Vector3 vitesse = _moveDirection * _currentSpeed;
         _rb.velocity = new Vector3(vitesse.x, _rb.velocity.y, vitesse.z);
+
+        if (vitesse == Vector3.zero)
+        {
+            IsMoving = false;
+            OnStopMoving?.Invoke();
+        }
     }
 
     /// <summary>
