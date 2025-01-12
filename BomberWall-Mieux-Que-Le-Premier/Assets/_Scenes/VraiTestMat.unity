@@ -3614,6 +3614,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlAyEr
       objectReference: {fileID: 0}
+    - target: {fileID: 3040865153507450744, guid: f3902d18980e7314eb42f79fbfdfb06c,
+        type: 3}
+      propertyPath: _deathPushForce
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4348736551549099284, guid: f3902d18980e7314eb42f79fbfdfb06c,
         type: 3}
       propertyPath: m_LocalPosition.x

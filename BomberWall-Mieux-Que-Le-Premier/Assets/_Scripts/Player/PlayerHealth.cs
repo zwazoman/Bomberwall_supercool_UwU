@@ -8,9 +8,11 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] int _maxHealth;
 
     [SerializeField] float _deathPushForce;
+    [SerializeField] float _deathTorqueForce;
 
     Damageable _damageable;
     Rigidbody _rb;
+    PlayerInputs _inputs;
 
     int _currentHealth;
 
@@ -18,6 +20,7 @@ public class PlayerHealth : MonoBehaviour
     {
         TryGetComponent(out _damageable);
         TryGetComponent(out _rb);
+        TryGetComponent(out _inputs);
         _currentHealth = _maxHealth;
     }
 
@@ -31,15 +34,18 @@ public class PlayerHealth : MonoBehaviour
         _currentHealth--;
         print("damage took");
         //juice
-        if (_currentHealth < _maxHealth) Die(killer);
+        if (_currentHealth == 0) Die(killer);
     }
 
     void Die(GameObject killer)
     {
         print("died");
-        Vector3 deathVector = killer.transform.position - transform.position;
+
+        _inputs.enabled = false; // marche pas
+        _rb.constraints = RigidbodyConstraints.None;
+        Vector3 deathVector = transform.position - killer.transform.position;
+        print(deathVector);
         _rb.AddForce(deathVector.normalized * _deathPushForce, ForceMode.Impulse);
-        //mourir
-        //juice
+        _rb.AddTorque(deathVector.normalized * _deathTorqueForce, ForceMode.Impulse);
     }
 }

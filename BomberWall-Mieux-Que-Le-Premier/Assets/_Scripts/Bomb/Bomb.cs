@@ -71,21 +71,19 @@ public class Bomb : MonoBehaviour,IPoolable
     /// </summary>
     public void Explode()
     {
+        if (transform.parent != null)
+        {
+            if (transform.parent.TryGetComponent(out BombHandler bombHandler))
+            {
+                bombHandler.BombDropped();
+            }
+        }
         Collider[] hits = Physics.OverlapSphere(transform.position, _explosionRadius, _explosionMask);
         foreach (Collider col in hits)
         {
             if (col.gameObject.TryGetComponent<Damageable>(out Damageable target))
             {
-                if(col.gameObject.TryGetComponent<BombHandler>(out BombHandler bombHandler))
-                {
-                    bombHandler.BombDropped();
-                }
                 target.ApplyDamage(gameObject);
-            }
-            else
-            {
-                Vector3 pushVector = col.transform.position - transform.position;
-                col.GetComponent<Bomb>().Push(pushVector.normalized * _explosionPushStrength);
             }
         }
 

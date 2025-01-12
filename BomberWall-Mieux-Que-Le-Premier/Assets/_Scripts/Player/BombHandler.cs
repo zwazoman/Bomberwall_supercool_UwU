@@ -116,10 +116,12 @@ public class BombHandler : MonoBehaviour
     public void BombDropped()
     {
         HasBombsEquipped = false;
-        _currentBombEquipped.GetComponent<Rigidbody>().isKinematic = false;
-        _currentBombEquipped.GetComponent<Collider>().enabled = true;
-        _currentBombEquipped.transform.parent = null;
-
+        if(_currentBombEquipped != null)
+        {
+            _currentBombEquipped.GetComponent<Rigidbody>().isKinematic = false;
+            _currentBombEquipped.GetComponent<Collider>().enabled = true;
+            _currentBombEquipped.transform.parent = null;
+        }
 
         OnBombDropped?.Invoke();
     }
