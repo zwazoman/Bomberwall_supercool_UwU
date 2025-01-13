@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Bomb : MonoBehaviour,IPoolable
@@ -11,6 +12,8 @@ public class Bomb : MonoBehaviour,IPoolable
     [SerializeField] float _explosionRadius = 1;
     [SerializeField] LayerMask _explosionMask;
     [SerializeField] float _explosionPushStrength = 1;
+
+    [SerializeField] GameObject _explode; 
 
     float _timer = 0;
 
@@ -72,7 +75,7 @@ public class Bomb : MonoBehaviour,IPoolable
     /// <summary>
     /// envoie des spherecasts autour de la bombe ingfligeant des dégats aux joueurs touchés
     /// </summary>
-    public void Explode()
+    public async void Explode()
     {
         OnBombExplode?.Invoke();
         if (transform.parent != null)
@@ -91,7 +94,9 @@ public class Bomb : MonoBehaviour,IPoolable
             }
         }
 
-        //juice
+        /*Debug.Log("test");
+        _explode.SetActive(true);
+        await Task.Delay(2000);*/
 
         ReturnToPool();
     }
