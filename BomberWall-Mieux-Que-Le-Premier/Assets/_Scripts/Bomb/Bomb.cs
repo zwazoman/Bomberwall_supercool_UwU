@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Bomb : MonoBehaviour,IPoolable
 {
+    public event Action OnBombExplode;
+
     [SerializeField] float _lifeTime;
     [SerializeField] float _explosionRadius = 1;
     [SerializeField] LayerMask _explosionMask;
@@ -71,6 +74,7 @@ public class Bomb : MonoBehaviour,IPoolable
     /// </summary>
     public void Explode()
     {
+        OnBombExplode?.Invoke();
         if (transform.parent != null)
         {
             if (transform.parent.TryGetComponent(out BombHandler bombHandler))
