@@ -16,7 +16,7 @@ public class BombPickup : MonoBehaviour,IPoolable
     private void Start()
     {
         _poolObject.OnPulledFromPool += OnPulledFromPool;
-        _poolObject.OnPushedToPool += OnPushedToPull;
+        _poolObject.OnPushedToPool += OnPushedToPool;
     }
 
     public void OnPulledFromPool()
@@ -25,7 +25,7 @@ public class BombPickup : MonoBehaviour,IPoolable
     }
     
 
-    public void OnPushedToPull()
+    public void OnPushedToPool()
     {
         throw new System.NotImplementedException();
     }
@@ -36,10 +36,9 @@ public class BombPickup : MonoBehaviour,IPoolable
         if (_poolObject == null) Destroy(gameObject); else _poolObject.PushToPool();
     }
 
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.TryGetComponent<BombHandler>(out BombHandler bombHandler))
+        if (other.gameObject.TryGetComponent<BombHandler>(out BombHandler bombHandler))
         {
             bombHandler.Pickup();
             ReturnToPool();

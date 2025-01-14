@@ -20,27 +20,30 @@ public class Bomb : MonoBehaviour,IPoolable
     //Poolable Initiator
     PoolObject _poolObject;
     Rigidbody _rb;
+    Damageable _damageable;
 
     private void Awake()
     {
         TryGetComponent<PoolObject>(out _poolObject);
         TryGetComponent<Rigidbody>(out _rb);
+        TryGetComponent<Damageable>(out _damageable);
     }
 
     private void Start()
     {
         _poolObject.OnPulledFromPool += OnPulledFromPool;
-        _poolObject.OnPushedToPool += OnPushedToPull;
+        _poolObject.OnPushedToPool += OnPushedToPool;
+        _damageable.OnTakeDamage += Propel;
     }
 
     public void OnPulledFromPool()
     {
-        throw new System.NotImplementedException();
+        print("chien");
     }
 
-
-    public void OnPushedToPull()
+    public void OnPushedToPool()
     {
+        print("singe");
         _timer = 0;
     }
 
@@ -61,6 +64,12 @@ public class Bomb : MonoBehaviour,IPoolable
         {
             Explode();
         }
+    }
+
+    void Propel(GameObject killer)
+    {
+        Vector3 propelVector = transform.position - killer.transform.position;
+        Push(propelVector * _explosionPushStrength);
     }
 
     /// <summary>

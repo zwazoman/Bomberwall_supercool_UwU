@@ -59,20 +59,21 @@ public class Pool : MonoBehaviour
     /// <returns></returns>
     public GameObject TakeFromPool(Vector3 pos, Quaternion rot)
     {
-        GameObject poolObject;
+        GameObject pooledObject;
         if (_pool.Count == 0)
         {
-            poolObject = AddNewObjectToPool();
+            print("empty pool case");
+            pooledObject = AddNewObjectToPool();
         }
         else
         {
-            poolObject = _pool.Dequeue();
+            pooledObject = _pool.Dequeue();
         }
-        poolObject.transform.position = pos;
-        poolObject.transform.rotation = rot;
-        poolObject.SetActive(true);
-        poolObject.GetComponent<PoolObject>().PullFromPool();
-        return poolObject;
+        pooledObject.transform.position = pos;
+        pooledObject.transform.rotation = rot;
+        pooledObject.SetActive(true);
+        pooledObject.GetComponent<PoolObject>().PullFromPool();
+        return pooledObject;
     }
 
     /// <summary>
@@ -82,19 +83,20 @@ public class Pool : MonoBehaviour
     /// <returns></returns>
     public GameObject TakeFromPool(Transform parent)
     {
-        GameObject poolObject;
+        GameObject pooledObject;
         if (_pool.Count == 0)
         {
-            poolObject = AddNewObjectToPool();
+            pooledObject = AddNewObjectToPool();
         }
         else
         {
-            poolObject = _pool.Dequeue();
+            pooledObject = _pool.Dequeue();
         }
-        poolObject.transform.parent = parent;
-        poolObject.SetActive(true);
-        poolObject.GetComponent<PoolObject>().PullFromPool();
-        return poolObject;
+        pooledObject.transform.parent = parent;
+        pooledObject.transform.position = parent.position;
+        pooledObject.SetActive(true);
+        pooledObject.GetComponent<PoolObject>().PullFromPool();
+        return pooledObject;
     }
 
 }
