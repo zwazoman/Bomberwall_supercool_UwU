@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1327179021652158701}
   - component: {fileID: 5879611978676828413}
   - component: {fileID: 9061704061645143348}
+  - component: {fileID: -3900119921838869455}
   m_Layer: 7
   m_Name: Bomb
   m_TagString: Untagged
@@ -101,7 +102,7 @@ MonoBehaviour:
   _explosionMask:
     serializedVersion: 2
     m_Bits: 448
-  _explosionPushStrength: 10
+  _explosionPushStrength: 15
   _explode: {fileID: 839345953168491762}
 --- !u!114 &9061704061645143348
 MonoBehaviour:
@@ -116,6 +117,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OriginPool: {fileID: 0}
+--- !u!114 &-3900119921838869455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4597338096193769022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db65686be0f08704ba9ae551973bfe12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7238465049691441755
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +140,6 @@ GameObject:
   - component: {fileID: 6873583688625975027}
   - component: {fileID: 3117980169385570256}
   - component: {fileID: 9056083489368005955}
-  - component: {fileID: 6873358945193312949}
   m_Layer: 7
   m_Name: Fuse
   m_TagString: Untagged
@@ -200,20 +212,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6873358945193312949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7238465049691441755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7d4cfff6f44647458bef7ec9e056aa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bomb: {fileID: 0}
-  _color: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &8234389689054027520
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,7 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d4cfff6f44647458bef7ec9e056aa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bomb: {fileID: 0}
+  _bomb: {fileID: 5879611978676828413}
   _color: {r: 0, g: 0, b: 0, a: 1}
 --- !u!111 &7360879080428457589
 Animation:
@@ -428,8 +426,8 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.2
-  m_PreviewTimeScale: 0
+  m_Time: 0.3
+  m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -445,6 +443,15 @@ TrailRenderer:
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4

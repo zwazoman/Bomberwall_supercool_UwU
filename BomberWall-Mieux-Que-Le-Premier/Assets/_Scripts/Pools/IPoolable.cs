@@ -17,5 +17,5 @@ public interface IPoolable
     /// <summary>
     /// OnDestroy Equivalent
     /// </summary>
-    public void OnPushedToPull();
+    public void OnPushedToPool();
 }
