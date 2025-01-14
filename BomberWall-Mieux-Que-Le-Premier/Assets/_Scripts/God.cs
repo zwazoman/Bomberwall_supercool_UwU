@@ -47,12 +47,12 @@ public class God : MonoBehaviour
         for (int i = 0; i<x; i++)
         {
             Transform selectedSpawn = availableSpawns[Random.Range(0, availableSpawns.Count)];
-            SpawnBombPickup(selectedSpawn);
             availableSpawns.Remove(selectedSpawn);
+            SpawnBombPickup(selectedSpawn);
         }
     }
 
-    void SummonBombPickup()
+    public void SummonBombPickup()
     {
         Transform selectedSpawn = _bombSpawns[Random.Range(0, _bombSpawns.Length)];
         SpawnBombPickup(selectedSpawn);
@@ -60,7 +60,7 @@ public class God : MonoBehaviour
 
     void SpawnBombPickup(Transform t)
     {
-        Pool pickupPool = PoolManager.Instance.AccessPool(Pools.BombPickup);
-        pickupPool.TakeFromPool(transform.position, Quaternion.identity);
+        GameObject bomb = PoolManager.Instance.AccessPool(Pools.BombPickup).TakeFromPool(t.position, Quaternion.identity);
+        bomb.SetActive(true);
     }
 }

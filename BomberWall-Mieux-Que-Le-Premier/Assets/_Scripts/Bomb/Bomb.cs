@@ -21,12 +21,14 @@ public class Bomb : MonoBehaviour,IPoolable
     PoolObject _poolObject;
     Rigidbody _rb;
     Damageable _damageable;
+    Animation _anim;
 
     private void Awake()
     {
-        TryGetComponent<PoolObject>(out _poolObject);
-        TryGetComponent<Rigidbody>(out _rb);
-        TryGetComponent<Damageable>(out _damageable);
+        TryGetComponent(out _poolObject);
+        TryGetComponent(out _rb);
+        TryGetComponent(out _damageable);
+        TryGetComponent(out _anim);
     }
 
     private void Start()
@@ -60,6 +62,7 @@ public class Bomb : MonoBehaviour,IPoolable
     private void Update()
     {
         _timer += Time.deltaTime;
+        _anim.
         if(_timer >= _lifeTime)
         {
             Explode();
@@ -87,6 +90,7 @@ public class Bomb : MonoBehaviour,IPoolable
     public async void Explode()
     {
         OnBombExplode?.Invoke();
+        God.Instance.SummonBombPickup();
         if (transform.parent != null)
         {
             if (transform.parent.TryGetComponent(out BombHandler bombHandler))
