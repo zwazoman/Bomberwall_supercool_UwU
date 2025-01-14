@@ -38,14 +38,16 @@ public class God : MonoBehaviour
 
     void SummonBombPickup(int x)
     {
-        for(int i = 0; i<x; i++)
+        List<Transform> availableSpawns = new List<Transform>();
+        foreach (Transform t in _bombSpawns)
         {
-            List<Transform> availableSpawns = new List<Transform>();
-            foreach (Transform t in _bombSpawns)
-            {
-                availableSpawns.Add(t);
-            }
+            availableSpawns.Add(t);
+        }
+
+        for (int i = 0; i<x; i++)
+        {
             Transform selectedSpawn = availableSpawns[Random.Range(0, availableSpawns.Count)];
+            SpawnBombPickup(selectedSpawn);
             availableSpawns.Remove(selectedSpawn);
         }
     }
@@ -53,6 +55,7 @@ public class God : MonoBehaviour
     void SummonBombPickup()
     {
         Transform selectedSpawn = _bombSpawns[Random.Range(0, _bombSpawns.Length)];
+        SpawnBombPickup(selectedSpawn);
     }
 
     void SpawnBombPickup(Transform t)

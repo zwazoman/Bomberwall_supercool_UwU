@@ -37,7 +37,7 @@ public class BombHandler : MonoBehaviour
     public void Pickup()
     {
         _bombsPossessedCount++;
-        _currentBombEquippedText.text = "X"+ _bombsPossessedCount.ToString();
+        _currentBombEquippedText.text = "X"+ _bombsPossessedCount.ToString(); // c'est cassé
         //updateUi
         //Juice
     }
