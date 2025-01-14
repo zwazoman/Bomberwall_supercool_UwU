@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BombHandler : MonoBehaviour
@@ -27,12 +28,16 @@ public class BombHandler : MonoBehaviour
     [SerializeField] int _bombsPossessedCount = 0;
     GameObject _currentBombEquipped;
 
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI _currentBombEquippedText;
+
     /// <summary>
     /// bombe ramassée
     /// </summary>
     public void Pickup()
     {
         _bombsPossessedCount++;
+        _currentBombEquippedText.text = "X"+ _bombsPossessedCount.ToString();
         //updateUi
         //Juice
     }
