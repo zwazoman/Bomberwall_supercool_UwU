@@ -8,6 +8,7 @@ public class BombHandler : MonoBehaviour
 {
     public event Action OnBombEquipped;
     public event Action OnBombDropped;
+    //public static event Action OnBombPickUp;
 
     public event Action OnThrow;
 
@@ -24,9 +25,10 @@ public class BombHandler : MonoBehaviour
     [SerializeField] Transform _bombDropSocket;
     [SerializeField] Transform _kickSocket;
 
-    public bool HasBombsEquipped = false;
-    [SerializeField] int _bombsPossessedCount = 0;
     GameObject _currentBombEquipped;
+
+    public bool HasBombsEquipped = false;
+    public int BombsPossessedCount { get; private set; } = 0;
 
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI _currentBombEquippedText;
@@ -36,9 +38,10 @@ public class BombHandler : MonoBehaviour
     /// </summary>
     public void Pickup()
     {
-        _bombsPossessedCount++;
-        _currentBombEquippedText.text = "X"+ _bombsPossessedCount.ToString(); // c'est cassé
+        BombsPossessedCount++;
+        _currentBombEquippedText.text = "X"+ BombsPossessedCount.ToString();
         //updateUi
+        //OnBombPickUp?.Invoke();
         //Juice
     }
 
@@ -52,9 +55,9 @@ public class BombHandler : MonoBehaviour
             Drop();
             return;
         }
-        if(_bombsPossessedCount > 0)
+        if(BombsPossessedCount > 0)
         {
-            _bombsPossessedCount--;
+            BombsPossessedCount--;
             HasBombsEquipped = true;
             GameObject bomb = PoolManager.Instance.AccessPool(Pools.Bomb).TakeFromPool(transform);
             _currentBombEquipped = bomb;

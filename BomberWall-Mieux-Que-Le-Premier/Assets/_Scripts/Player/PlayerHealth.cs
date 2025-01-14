@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using System;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -14,14 +15,14 @@ public class PlayerHealth : MonoBehaviour
     Rigidbody _rb;
     PlayerInputs _inputs;
 
-    int _currentHealth;
+    public int CurrentHealth { get; private set; }
 
     private void Awake()
     {
         TryGetComponent(out _damageable);
         TryGetComponent(out _rb);
         TryGetComponent(out _inputs);
-        _currentHealth = _maxHealth;
+        CurrentHealth = _maxHealth;
     }
 
     private void Start()
@@ -31,10 +32,10 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(GameObject killer)
     {
-        _currentHealth--;
+        CurrentHealth--;
         print("damage took");
         //juice
-        if (_currentHealth == 0) Die(killer);
+        if (CurrentHealth == 0) Die(killer);
     }
 
     void Die(GameObject killer)
