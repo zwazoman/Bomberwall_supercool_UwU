@@ -8,7 +8,7 @@ public class BombHandler : MonoBehaviour
 {
     public event Action OnBombEquipped;
     public event Action OnBombDropped;
-    //public static event Action OnBombPickUp;
+    public event Action OnBombPickUp;
 
     public event Action OnThrow;
 
@@ -28,10 +28,7 @@ public class BombHandler : MonoBehaviour
     GameObject _currentBombEquipped;
 
     public bool HasBombsEquipped = false;
-    public int BombsPossessedCount { get; private set; } = 0;
-
-    [Header("UI")]
-    [SerializeField] private TextMeshProUGUI _currentBombEquippedText;
+    public int BombsPossessedCount { get; private set; } = 10;
 
     /// <summary>
     /// bombe ramassée
@@ -39,9 +36,8 @@ public class BombHandler : MonoBehaviour
     public void Pickup()
     {
         BombsPossessedCount++;
-        _currentBombEquippedText.text = "X"+ BombsPossessedCount.ToString();
+        OnBombPickUp?.Invoke();
         //updateUi
-        //OnBombPickUp?.Invoke();
         //Juice
     }
 

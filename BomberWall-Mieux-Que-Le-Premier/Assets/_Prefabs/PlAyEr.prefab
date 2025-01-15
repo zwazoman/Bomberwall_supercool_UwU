@@ -105,13 +105,14 @@ GameObject:
   - component: {fileID: 4202521946977047375}
   - component: {fileID: 1119924251431484409}
   - component: {fileID: 7929834039831969085}
+  - component: {fileID: 7034659800296572641}
   m_Layer: 6
   m_Name: PlAyEr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4348736551549099284
 Transform:
   m_ObjectHideFlags: 0
@@ -301,7 +302,6 @@ MonoBehaviour:
   _bombDropSocket: {fileID: 6890952419694699457}
   _kickSocket: {fileID: 3882634052787109187}
   HasBombsEquipped: 0
-  _bombsPossessedCount: 10
   _currentBombEquippedText: {fileID: 0}
 --- !u!114 &1271569658401742290
 MonoBehaviour:
@@ -482,6 +482,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7034659800296572641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2319394959383672701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ef46f30fe0a844fa7972b1631ad2f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2491972943311563564
 GameObject:
   m_ObjectHideFlags: 0
