@@ -565,7 +565,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textBombe: {fileID: 4939942575376278452}
-  _nombrePV: 0
+  _heartImage:
+  - {fileID: 8838261152124218905}
+  - {fileID: 8710748883379015289}
+  - {fileID: 4349633568945608128}
   Player: {fileID: 0}
 --- !u!1 &5260769261040681721
 GameObject:

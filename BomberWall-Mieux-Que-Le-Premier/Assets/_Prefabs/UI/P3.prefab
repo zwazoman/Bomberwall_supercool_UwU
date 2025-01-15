@@ -699,5 +699,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textBombe: {fileID: 1911801698326116881}
-  _nombrePV: 0
+  _heartImage:
+  - {fileID: 5870810815862623398}
+  - {fileID: 4953026239069949955}
+  - {fileID: 2293446322398047158}
   Player: {fileID: 0}
