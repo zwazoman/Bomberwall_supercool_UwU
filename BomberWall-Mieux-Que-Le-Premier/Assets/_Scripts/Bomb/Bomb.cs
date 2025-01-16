@@ -8,12 +8,14 @@ public class Bomb : MonoBehaviour,IPoolable
 {
     public event Action OnBombExplode;
 
-    [SerializeField] float _lifeTime;
+    [SerializeField] public float _lifeTime;
     [SerializeField] float _explosionRadius = 1;
     [SerializeField] LayerMask _explosionMask;
     [SerializeField] float _explosionPushStrength = 1;
 
-    float _timer = 0;
+    [SerializeField] GameObject _explode; 
+
+    [HideInInspector] public float Timer = 0;
 
     //Poolable Initiator
     PoolObject _poolObject;
@@ -44,7 +46,7 @@ public class Bomb : MonoBehaviour,IPoolable
     public void OnPushedToPool()
     {
         print("singe");
-        _timer = 0;
+        Timer = 0;
     }
 
     public void ReturnToPool()
@@ -59,8 +61,8 @@ public class Bomb : MonoBehaviour,IPoolable
     /// </summary>
     private void Update()
     {
-        _timer += Time.deltaTime;
-        if(_timer >= _lifeTime)
+        Timer += Time.deltaTime;
+        if(Timer >= _lifeTime)
         {
             Explode();
         }
