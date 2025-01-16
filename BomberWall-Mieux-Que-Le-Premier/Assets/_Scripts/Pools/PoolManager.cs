@@ -6,7 +6,8 @@ using UnityEngine;
 public enum Pools
 {
     Bomb,
-    BombPickup
+    BombPickup,
+    Explosion
 }
 
 /// <summary>

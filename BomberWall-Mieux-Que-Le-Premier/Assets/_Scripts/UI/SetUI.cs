@@ -13,18 +13,19 @@ public class SetUI : MonoBehaviour
 
     private  int _nombrePV = 3;
     private BombHandler _bombHandler;
-    private Damageable _damageable;
+    private PlayerHealth _playerHealth;
+    private int _tourboucle = 1;
 
     [HideInInspector] public GameObject Player;
 
     private void Start()
     {
         Player.TryGetComponent<BombHandler>(out _bombHandler);
-        Player.TryGetComponent<Damageable>(out _damageable);
+        Player.TryGetComponent<PlayerHealth>(out _playerHealth);
         _bombHandler.OnBombPickUp += SetBombe;
         _bombHandler.OnBombDropped += SetBombe;
         _bombHandler.OnThrow += SetBombe;
-        _damageable.OnTakeDamage += SetHealth;
+        _playerHealth.OnTakeDamage += SetHealth;
         SetBombe();
     }
 
@@ -39,9 +40,10 @@ public class SetUI : MonoBehaviour
     /// <summary>
     /// Fonction qui modiefie l'UI du joueur (vie)
     /// </summary>
-    public void SetHealth(GameObject Apolish)
+    public void SetHealth()
     {
-        _heartImage[_heartImage.Count - 1].color = Color.black;
+        _heartImage[_heartImage.Count - _tourboucle].color = Color.black;
         _nombrePV--;
+        _tourboucle++;
     }
 }

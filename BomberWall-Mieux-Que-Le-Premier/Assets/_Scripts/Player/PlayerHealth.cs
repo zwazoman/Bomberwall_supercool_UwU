@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+    public event Action OnTakeDamage;
+
     [SerializeField] int _maxHealth;
 
     [SerializeField] float _deathPushForce;
@@ -36,6 +38,7 @@ public class PlayerHealth : MonoBehaviour
         CurrentHealth--;
         print("damage took");
         //juice
+        OnTakeDamage?.Invoke();
         _test.Play();
         if (CurrentHealth == 0) Die(killer);
     }
