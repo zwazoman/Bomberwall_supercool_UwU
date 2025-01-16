@@ -10,27 +10,36 @@ public class AI_StateMachine : MonoBehaviour
 
     AI_BaseState currentState;
 
-    AI_ChaseState chaseState;
-    AI_FleaState fleaState;
-    AI_ReloadState reloadState;
+    public AI_ReflexionState ChaseState;
+    public AI_FleaState FleaState;
+    public AI_ReloadState ReloadState;
+    public AI_KamikazeState KamikazeState;
+    public AI_ReflexionState ReflexionState;
 
     private void Start()
     {
-        chaseState = new AI_ChaseState();
-        chaseState.StateMachine = this;
+        ChaseState = new AI_ReflexionState();
+        ChaseState.StateMachine = this;
 
-        fleaState = new AI_FleaState();
-        fleaState.StateMachine = this;
+        FleaState = new AI_FleaState();
+        FleaState.StateMachine = this;
 
 
-        reloadState = new AI_ReloadState();
-        reloadState.StateMachine = this;
+        ReloadState = new AI_ReloadState();
+        ReloadState.StateMachine = this;
 
-        currentState = reloadState;
+        KamikazeState = new AI_KamikazeState();
+        KamikazeState.StateMachine = this;
+
+        ReflexionState = new AI_ReflexionState();
+        ReflexionState.StateMachine = this;
+
+        currentState = ReloadState;
     }
 
     public void TransitionTo(AI_BaseState state)
     {
+        if (state == currentState) return;
         currentState.OnExit();
 
         currentState = state;
