@@ -21,13 +21,13 @@ public class BombPickup : MonoBehaviour,IPoolable
 
     public void OnPulledFromPool()
     {
-        throw new System.NotImplementedException();
+        //
     }
     
 
     public void OnPushedToPool()
     {
-        throw new System.NotImplementedException();
+        //
     }
 
     public void ReturnToPool()
@@ -41,6 +41,7 @@ public class BombPickup : MonoBehaviour,IPoolable
         if (other.gameObject.TryGetComponent<BombHandler>(out BombHandler bombHandler))
         {
             bombHandler.Pickup();
+            God.Instance._bombPickups.Remove(transform);
             ReturnToPool();
         }
     }

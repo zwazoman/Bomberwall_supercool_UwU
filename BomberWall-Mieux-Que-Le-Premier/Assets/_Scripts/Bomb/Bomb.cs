@@ -86,7 +86,7 @@ public class Bomb : MonoBehaviour,IPoolable
     /// <summary>
     /// envoie des spherecasts autour de la bombe ingfligeant des dégats aux joueurs touchés
     /// </summary>
-    public async void Explode()
+    public void Explode()
     {
         OnBombExplode?.Invoke();
         God.Instance.SummonBombPickup();
@@ -105,11 +105,6 @@ public class Bomb : MonoBehaviour,IPoolable
                 target.ApplyDamage(gameObject);
             }
         }
-
-        /*Debug.Log("test");
-        _explode.SetActive(true);
-        await Task.Delay(2000);*/
-
         ReturnToPool();
     }
 
