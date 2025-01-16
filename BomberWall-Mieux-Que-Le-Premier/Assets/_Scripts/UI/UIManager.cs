@@ -2,37 +2,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Script qui gère "l'individualisme" de l'UI selon le joueur
+/// </summary>
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] PlayerInputManager _playerInputManager;
-    [SerializeField] private List<GameObject> _playersBar = new List<GameObject>();
+    [SerializeField] private PlayerInputManager _playerInputManager;
     [SerializeField] private List<Transform> _playerSpawn = new List<Transform>();
+    [SerializeField] private GameObject[] _uiPrefabs; // Tableau de préfab UI (J1, J2, J3, J4)
+    [SerializeField] private CanvasRenderer _canvas; // Référence au panelPlayerLife dans la scène
 
-    public Dictionary<GameObject, GameObject> UIPlayer;
+    public static UIManager Instance;
 
     private void Awake()
     {
-        if (_playersBar.Count != 4 || _playerSpawn.Count != 4 || _playerInputManager == null) { Debug.LogError("Il manque 1 ou plusieurs ref dans le script UIManager"); return; }
-        foreach (GameObject PlayerUI in _playersBar) { PlayerUI.SetActive(false); }
-        UIPlayer = new Dictionary<GameObject, GameObject>();
+        Instance = this;
+        if (_playerInputManager == null || _playerSpawn.Count == 0 || _uiPrefabs.Length != 4) { return; }
+    }
+
+    private void Start()
+    {
+        _playerInputManager.onPlayerJoined += OnPlayerJoined;
     }
 
     /// <summary>
-    /// Fonction qui se joue au spawn d'un joueur
+    /// A chaque fois que un joueur apparaît
     /// </summary>
-    public void PlayerSpawn()
+    private void OnPlayerJoined(PlayerInput playerInput)
     {
-        for (int i = 0; i < _playerInputManager.playerCount; i++)
-        {
-            GameObject playerUI = _playersBar[i];
-            Transform spawnPosition = _playerSpawn[i];
-            playerUI.SetActive(true);
-            GameObject newPlayer = _playerInputManager.playerPrefab;
-            newPlayer.transform.position = spawnPosition.position;
+        int playerIndex = playerInput.playerIndex;
 
-            if (!UIPlayer.ContainsKey(newPlayer))
+        if (playerIndex >= _playerSpawn.Count) { return; }
+
+        Transform spawnPosition = _playerSpawn[playerIndex];
+        playerInput.transform.position = spawnPosition.position;
+
+        if (playerIndex < _uiPrefabs.Length)
+        {
+            GameObject uiInstance = Instantiate(_uiPrefabs[playerIndex], _canvas.transform);
+            PlayerAttributeUI playerUIComponent = playerInput.GetComponent<PlayerAttributeUI>();
+            if (playerUIComponent != null)
             {
-                UIPlayer.Add(newPlayer, playerUI);
+                playerUIComponent.AssignUI(uiInstance);
             }
         }
     }

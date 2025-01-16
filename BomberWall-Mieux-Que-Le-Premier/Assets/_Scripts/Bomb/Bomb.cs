@@ -62,7 +62,6 @@ public class Bomb : MonoBehaviour,IPoolable
     private void Update()
     {
         _timer += Time.deltaTime;
-        _anim.
         if(_timer >= _lifeTime)
         {
             Explode();
