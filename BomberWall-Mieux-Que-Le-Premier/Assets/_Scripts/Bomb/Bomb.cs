@@ -13,8 +13,6 @@ public class Bomb : MonoBehaviour,IPoolable
     [SerializeField] LayerMask _explosionMask;
     [SerializeField] float _explosionPushStrength = 1;
 
-    [SerializeField] GameObject _explode; 
-
     [HideInInspector] public float Timer = 0;
 
     //Poolable Initiator
