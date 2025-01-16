@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Ai_Sensor : MonoBehaviour
 {
-    public event Action OnBombNear;
-    public event Action OnBombVeryNear;
+    public event Action<GameObject> OnBombNear;
+    public event Action<GameObject> OnBombVeryNear;
     public event Action OnBombFar;
     public event Action OnPlayerInRange;
 
@@ -30,7 +30,7 @@ public class Ai_Sensor : MonoBehaviour
             if(item.gameObject.TryGetComponent<Bomb>(out Bomb bomb))
             {
                 float bombDistance = (item.transform.position - transform.position).magnitude;
-                if (bombDistance <= _bombDetectionrange / 2) OnBombVeryNear?.Invoke(); else OnBombNear?.Invoke();
+                if (bombDistance <= _bombDetectionrange / 2) OnBombVeryNear?.Invoke(bomb.gameObject); else OnBombNear?.Invoke(bomb.gameObject);
             }
             else
             {

@@ -25,7 +25,6 @@ public class Bomb : MonoBehaviour,IPoolable
 
     private void Awake()
     {
-        TryGetComponent(out _poolObject);
         TryGetComponent(out _rb);
         TryGetComponent(out _damageable);
         TryGetComponent(out _anim);
@@ -33,6 +32,7 @@ public class Bomb : MonoBehaviour,IPoolable
 
     private void Start()
     {
+        TryGetComponent(out _poolObject);
         _poolObject.OnPulledFromPool += OnPulledFromPool;
         _poolObject.OnPushedToPool += OnPushedToPool;
         _damageable.OnTakeDamage += Propel;
@@ -100,6 +100,7 @@ public class Bomb : MonoBehaviour,IPoolable
         Collider[] hits = Physics.OverlapSphere(transform.position, _explosionRadius, _explosionMask);
         foreach (Collider col in hits)
         {
+            if (Physics.Raycast(transform.position, col.transform.position - transform.position, _explosionRadius, LayerMask.GetMask("Wall"))) continue;
             if (col.gameObject.TryGetComponent<Damageable>(out Damageable target))
             {
                 target.ApplyDamage(gameObject);

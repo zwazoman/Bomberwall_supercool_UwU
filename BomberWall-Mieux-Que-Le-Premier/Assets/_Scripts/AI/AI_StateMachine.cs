@@ -14,7 +14,6 @@ public class AI_StateMachine : MonoBehaviour
     public AI_FleaState FleaState;
     public AI_ReloadState ReloadState;
     public AI_KamikazeState KamikazeState;
-    public AI_ReflexionState ReflexionState;
 
     private void Start()
     {
@@ -30,9 +29,6 @@ public class AI_StateMachine : MonoBehaviour
 
         KamikazeState = new AI_KamikazeState();
         KamikazeState.StateMachine = this;
-
-        ReflexionState = new AI_ReflexionState();
-        ReflexionState.StateMachine = this;
 
         currentState = ReloadState;
     }

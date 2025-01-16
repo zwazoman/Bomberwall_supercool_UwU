@@ -417,6 +417,7 @@ GameObject:
   - component: {fileID: 4446352919494218301}
   - component: {fileID: 5529940249435042390}
   - component: {fileID: 4425735868361280120}
+  - component: {fileID: 6301224263186290390}
   - component: {fileID: 7042334991582699391}
   - component: {fileID: 964153707736642990}
   - component: {fileID: 6933204920376571578}
@@ -528,6 +529,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6301224263186290390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8168836632968410100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29849fa56ef5a904792f13597fbccc2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sensor: {fileID: 964153707736642990}
+  Controller: {fileID: 7042334991582699391}
 --- !u!114 &7042334991582699391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,6 +567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bd50e8dd6ab534793c2773369b4e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bombDetectionrange: 1
 --- !u!114 &6933204920376571578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,6 +583,7 @@ MonoBehaviour:
   _maxHealth: 3
   _deathPushForce: 50
   _deathTorqueForce: 0
+  _test: {fileID: 0}
 --- !u!114 &3821982234921701981
 MonoBehaviour:
   m_ObjectHideFlags: 0

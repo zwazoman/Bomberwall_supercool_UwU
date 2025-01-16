@@ -15,8 +15,9 @@ public abstract class AI_BaseState
         StateMachine.TransitionTo(StateMachine.ChaseState);
     }
 
-    protected void EnterFlea()
+    protected void EnterFlea(GameObject bomb)
     {
+        StateMachine.FleaState.Bomb = bomb;
         StateMachine.TransitionTo(StateMachine.FleaState);
     }
 
@@ -25,13 +26,9 @@ public abstract class AI_BaseState
         StateMachine.TransitionTo(StateMachine.ReloadState);
     }
 
-    protected void EnterKamikaze()
+    protected void EnterKamikaze(GameObject bomb)
     {
+        StateMachine.KamikazeState.Bomb = bomb;
         StateMachine.TransitionTo(StateMachine.KamikazeState);
-    }
-
-    protected void EnterReflexion()
-    {
-        StateMachine.TransitionTo(StateMachine.ReflexionState);
     }
 }

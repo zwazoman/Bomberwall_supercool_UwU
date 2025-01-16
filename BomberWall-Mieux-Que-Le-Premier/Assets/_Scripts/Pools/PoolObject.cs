@@ -20,7 +20,6 @@ public class PoolObject : MonoBehaviour
 
     public void PullFromPool()
     {
-        print("connard ptn");
         OnPulledFromPool?.Invoke();
     }
 

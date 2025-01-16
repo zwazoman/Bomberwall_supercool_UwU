@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class AI_FleaState : AI_BaseState
 {
+    public GameObject Bomb;
+
     public override void OnEnter()
     {
-        throw new System.NotImplementedException();
+        StateMachine.Sensor.OnBombFar += EnterChase;
+
+        Flea();
+    }
+
+    void Flea()
+    {
+
     }
 
     public override void OnExit()
