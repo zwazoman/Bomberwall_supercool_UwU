@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class ExplosionVFX : MonoBehaviour, IPoolable
@@ -6,7 +7,7 @@ public class ExplosionVFX : MonoBehaviour, IPoolable
     private PoolObject _poolObject;
 
 
-    void Awake()
+    void Start()
     {
         TryGetComponent(out _poolObject);
         TryGetComponent(out _bomb);
@@ -15,19 +16,23 @@ public class ExplosionVFX : MonoBehaviour, IPoolable
         _poolObject.OnPushedToPool += OnPushedToPool;
     }
 
-    public void Boom()
+    public async void Boom()
     {
-
+        print("test");
+        GameObject VFX = PoolManager.Instance.AccessPool(Pools.Explosion).TakeFromPool(transform.position, Quaternion.identity);
+        VFX.SetActive(true);
+        await Task.Delay(1200);
+        ReturnToPool();
     }
 
     public void OnPulledFromPool()
     {
-        throw new System.NotImplementedException();
+//
     }
 
     public void OnPushedToPool()
     {
-        throw new System.NotImplementedException();
+//
     }
 
     public void ReturnToPool()

@@ -5,7 +5,7 @@ using UnityEngine;
 public class BombVisuals : MonoBehaviour
 {
     [SerializeField] Bomb _bomb;
-    [SerializeField] Color _color = new Color(0,0,0);
+    [SerializeField] Color _color;
 
     MeshRenderer _renderer;
     MaterialPropertyBlock _propertyBlock;
