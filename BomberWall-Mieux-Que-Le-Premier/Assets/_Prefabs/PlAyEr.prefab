@@ -4919,6 +4919,8 @@ GameObject:
   - component: {fileID: 1119924251431484409}
   - component: {fileID: 7929834039831969085}
   - component: {fileID: 7034659800296572641}
+  - component: {fileID: 7113738847864256580}
+  - component: {fileID: 7425325084400908991}
   m_Layer: 6
   m_Name: PlAyEr
   m_TagString: Untagged
@@ -5097,6 +5099,7 @@ MonoBehaviour:
   _rotationSpeed: 25
   _rb: {fileID: 4202521946977047375}
   MoveInput: {x: 0, y: 0}
+  CanMove: 0
 --- !u!114 &7488441892604067622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5231,6 +5234,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: c3151a30-1da4-4a46-ab34-6575bf018c14
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7113738847864256580}
+        m_TargetAssemblyTypeName: JoinGame, Assembly-CSharp
+        m_MethodName: GameBegin
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fca107a0-9815-4ace-b020-f497a9142a9b
+    m_ActionName: Player/GameBegin[/Keyboard/f]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -5306,6 +5325,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40ef46f30fe0a844fa7972b1631ad2f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7113738847864256580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2319394959383672701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aac868d7f022ef8438be9dff7ff64ab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7425325084400908991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2319394959383672701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56bdfcc1d50b97043930ad11359c1433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2491972943311563564

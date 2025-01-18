@@ -28,16 +28,17 @@ public class PlayerMove : MonoBehaviour
     [Tooltip("C'est juste un RigidBody mdr")]
     [SerializeField] private Rigidbody _rb;
 
+    private JoinGame _joinGame;
+
     private Vector3 _moveDirection;
     private float _currentSpeed;
     private float _accelerationTimer;
 
     [HideInInspector] public Vector2 MoveInput;
     #endregion
-
+    public bool CanMove;
     public event Action OnStartMoving;
     public event Action OnStopMoving;
-
 
     private void FixedUpdate()
     {
@@ -50,6 +51,7 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private void Movement()
     {
+        if (!CanMove) { return; }
         if (MoveInput.sqrMagnitude > 0.01f) //accélération
         {
             OnStartMoving?.Invoke();
@@ -83,6 +85,5 @@ public class PlayerMove : MonoBehaviour
         if (MoveInput.sqrMagnitude < 0.01f) { return; }
         Quaternion targetRotation = Quaternion.LookRotation(_moveDirection);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * _rotationSpeed);
-
     }
 }

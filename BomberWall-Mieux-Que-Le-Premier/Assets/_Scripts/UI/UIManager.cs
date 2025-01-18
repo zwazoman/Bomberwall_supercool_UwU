@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private List<Transform> _playerSpawn = new List<Transform>();
     [SerializeField] private GameObject[] _uiPrefabs; // Tableau de préfab UI (J1, J2, J3, J4)
     [SerializeField] private CanvasRenderer _canvas; // Référence au panelPlayerLife dans la scène
+    
+    public List<GameObject> Players = new List<GameObject>();
 
     public static UIManager Instance;
 
@@ -32,6 +34,8 @@ public class UIManager : MonoBehaviour
     {
         int playerIndex = playerInput.playerIndex;
 
+        Players.Add(playerInput.gameObject);
+
         if (playerIndex >= _playerSpawn.Count) { return; }
 
         Transform spawnPosition = _playerSpawn[playerIndex];
@@ -39,7 +43,7 @@ public class UIManager : MonoBehaviour
 
         if (playerIndex < _uiPrefabs.Length)
         {
-            GameObject uiInstance = Instantiate(_uiPrefabs[playerIndex], _canvas.transform);
+            GameObject uiInstance = Instantiate(_uiPrefabs[playerIndex], _canvas.transform); //On fait spawn l'ui du joueur lorsque il apparait
             PlayerAttributeUI playerUIComponent = playerInput.GetComponent<PlayerAttributeUI>();
             if (playerUIComponent != null)
             {

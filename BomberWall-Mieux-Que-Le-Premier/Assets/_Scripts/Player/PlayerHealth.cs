@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     public event Action OnTakeDamage;
+    public event Action OnDeath;
 
     [SerializeField] int _maxHealth;
 
@@ -53,5 +54,7 @@ public class PlayerHealth : MonoBehaviour
         print(deathVector);
         _rb.AddForce(deathVector.normalized * _deathPushForce, ForceMode.Impulse);
         _rb.AddTorque(deathVector.normalized * _deathTorqueForce, ForceMode.Impulse);
+        UIManager.Instance.Players.Remove(gameObject);
+        OnDeath?.Invoke();
     }
 }
