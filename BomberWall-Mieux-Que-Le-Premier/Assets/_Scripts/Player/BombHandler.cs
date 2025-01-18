@@ -37,8 +37,6 @@ public class BombHandler : MonoBehaviour
     {
         BombsPossessedCount++;
         OnBombPickUp?.Invoke();
-        //updateUi
-        //Juice
     }
 
     /// <summary>
@@ -46,6 +44,7 @@ public class BombHandler : MonoBehaviour
     /// </summary>
     public void Equip()
     {
+        print("hm?");
         if (HasBombsEquipped)
         {
             Drop();
@@ -67,7 +66,6 @@ public class BombHandler : MonoBehaviour
         else
         {
             print("No Bombs");
-            //juice
         }
     }
 

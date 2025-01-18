@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 7852602924156658035}
   - component: {fileID: 6220140523279006389}
   - component: {fileID: 1994591684632058414}
+  - component: {fileID: 4500284481585805170}
   m_Layer: 5
   m_Name: Bomb
   m_TagString: Untagged
@@ -285,6 +286,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!111 &4500284481585805170
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4038557086676919771}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 073b8e01e50e3a241af518271c1e94c6, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 073b8e01e50e3a241af518271c1e94c6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &4550390706708491938
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,4 +720,5 @@ MonoBehaviour:
   - {fileID: 5870810815862623398}
   - {fileID: 4953026239069949955}
   - {fileID: 2293446322398047158}
+  BombAnim: {fileID: 4500284481585805170}
   Player: {fileID: 0}

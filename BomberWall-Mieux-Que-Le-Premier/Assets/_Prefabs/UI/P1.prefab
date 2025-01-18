@@ -258,7 +258,6 @@ GameObject:
   - component: {fileID: 4876434775515566493}
   - component: {fileID: 5523387832146204778}
   - component: {fileID: 4349633568945608128}
-  - component: {fileID: 8093670535190294864}
   m_Layer: 5
   m_Name: PV
   m_TagString: Untagged
@@ -323,22 +322,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!111 &8093670535190294864
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1480437848602527934}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 59421fd008cf7ee4aac5426cb0033572, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1 &1560888860072108140
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,6 +552,7 @@ MonoBehaviour:
   - {fileID: 8838261152124218905}
   - {fileID: 8710748883379015289}
   - {fileID: 4349633568945608128}
+  BombAnim: {fileID: 8585992035775988402}
   Player: {fileID: 0}
 --- !u!1 &5260769261040681721
 GameObject:
@@ -656,6 +640,7 @@ GameObject:
   - component: {fileID: 8690437025414420124}
   - component: {fileID: 5592919950914099798}
   - component: {fileID: 4524503025570692276}
+  - component: {fileID: 8585992035775988402}
   m_Layer: 5
   m_Name: Bomb
   m_TagString: Untagged
@@ -721,3 +706,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!111 &8585992035775988402
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8006299410828410579}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 073b8e01e50e3a241af518271c1e94c6, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 073b8e01e50e3a241af518271c1e94c6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
