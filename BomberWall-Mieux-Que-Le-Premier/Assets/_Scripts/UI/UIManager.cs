@@ -33,7 +33,6 @@ public class UIManager : MonoBehaviour
     private void OnPlayerJoined(PlayerInput playerInput)
     {
         int playerIndex = playerInput.playerIndex;
-
         Players.Add(playerInput.gameObject);
 
         if (playerIndex >= _playerSpawn.Count) { return; }
