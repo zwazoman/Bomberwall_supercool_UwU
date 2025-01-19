@@ -29,7 +29,7 @@ public class SetUI : MonoBehaviour
         Player.TryGetComponent<PlayerHealth>(out _playerHealth);
         _bombHandler.OnBombPickUp += SetBombe;
         _bombHandler.OnBombEquipped += SetBombe;
-        _playerHealth.OnTakeDamage += SetHealth;
+        _playerHealth.OnDamageTook += SetHealth;
         SetBombe();
     }
 

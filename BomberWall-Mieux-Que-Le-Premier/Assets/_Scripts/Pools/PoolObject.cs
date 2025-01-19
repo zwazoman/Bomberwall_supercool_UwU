@@ -11,11 +11,6 @@ public class PoolObject : MonoBehaviour
 
     public Pool OriginPool;
 
-    private void Awake()
-    {
-        print("si ça marche faut pas que ça" + OriginPool + "soit Null");
-    }
-
     public void PullFromPool()
     {
         OnPulledFromPool?.Invoke();

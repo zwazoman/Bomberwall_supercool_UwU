@@ -24,14 +24,14 @@ public class God : MonoBehaviour
         instance = this;
     }
 
-    [SerializeField] int _bombCount;
-    [SerializeField] Transform[] _bombSpawns;
+    [SerializeField] public int StartPickupCount;
+    [SerializeField] public List<Transform> _bombSpawns = new List<Transform>();
 
-    public List<Transform> _bombPickups = new List<Transform>();
+    [HideInInspector] public List<Transform> _bombPickups = new List<Transform>();
 
-    private void Start()
+    public void Start()
     {
-        SummonBombPickup(_bombCount);
+        SummonBombPickup(StartPickupCount);
     }
 
     void SummonBombPickup(int x)
@@ -52,7 +52,7 @@ public class God : MonoBehaviour
 
     public void SummonBombPickup()
     {
-        Transform selectedSpawn = _bombSpawns[Random.Range(0, _bombSpawns.Length)];
+        Transform selectedSpawn = _bombSpawns[Random.Range(0, _bombSpawns.Count)];
         SpawnBombPickup(selectedSpawn);
     }
 

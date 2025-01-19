@@ -13,7 +13,7 @@ public class AI_FleaState : AI_BaseState
 
     void Flea()
     {
-
+        //chope un point derrière lui quand il regarde la bombe
     }
 
     public override void OnExit()

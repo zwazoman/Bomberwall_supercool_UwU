@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public event Action OnTakeDamage;
+    public event Action OnDamageTook;
     public event Action OnDeath;
 
-    [SerializeField] int _maxHealth;
+    [SerializeField] public int Maxhealth;
 
     [SerializeField] float _deathPushForce;
     [SerializeField] float _deathTorqueForce;
@@ -16,14 +16,14 @@ public class PlayerHealth : MonoBehaviour
     Rigidbody _rb;
     PlayerInputs _inputs;
 
-    public int CurrentHealth { get; private set; }
+    public int CurrentHealth { get; set; }
 
     private void Awake()
     {
         TryGetComponent(out _damageable);
         TryGetComponent(out _rb);
         TryGetComponent(out _inputs);
-        CurrentHealth = _maxHealth;
+        CurrentHealth = Maxhealth;
     }
 
     private void Start()
@@ -34,10 +34,9 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(GameObject killer)
     {
         CurrentHealth--;
-        print("damage took");
         //juice
-        OnTakeDamage?.Invoke();
-        _test.Play();
+        OnDamageTook?.Invoke();
+        //_test.Play(); ça faut le faire dans un script a part (genre visuals et le relier a l'event
         if (CurrentHealth == 0) Die(killer);
     }
 

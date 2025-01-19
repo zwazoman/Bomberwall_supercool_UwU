@@ -35,10 +35,10 @@ public class PoolManager : MonoBehaviour
     }
 
 
-    [SerializeField] List<Pool> _poolsList = new List<Pool>();
+    [SerializeField] public List<Pool> PoolsList = new List<Pool>();
 
     public Pool AccessPool(Pools choosenPool)
     {
-        return _poolsList[(int)choosenPool];
+        return PoolsList[(int)choosenPool];
     }
 }

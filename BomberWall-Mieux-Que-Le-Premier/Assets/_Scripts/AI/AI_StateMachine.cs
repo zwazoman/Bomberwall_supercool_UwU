@@ -5,7 +5,7 @@ public class AI_StateMachine : MonoBehaviour
     public Ai_Sensor Sensor;
     public AI_Controller Controller;
 
-    AI_BaseState currentState;
+    public AI_BaseState CurrentState { get; private set; }
 
     public AI_ReflexionState ChaseState;
     public AI_FleaState FleaState;
@@ -27,20 +27,20 @@ public class AI_StateMachine : MonoBehaviour
         KamikazeState = new AI_KamikazeState();
         KamikazeState.StateMachine = this;
 
-        currentState = ReloadState;
+        CurrentState = ReloadState;
     }
 
     public void TransitionTo(AI_BaseState state)
     {
-        if (state == currentState) return;
-        currentState.OnExit();
+        if (state == CurrentState) return;
+        CurrentState.OnExit();
 
-        currentState = state;
-        currentState.OnEnter();
+        CurrentState = state;
+        CurrentState.OnEnter();
     }
 
     private void Update()
     {
-        currentState.Update();
+        CurrentState.Update();
     }
 }

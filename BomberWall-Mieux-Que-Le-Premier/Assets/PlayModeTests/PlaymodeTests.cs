@@ -8,18 +8,49 @@ public class PlaymodeTests
 {
     // A Test behaves as an ordinary method
     [Test]
-    public void PlaymodeTestsSimplePasses()
+    public void TestStateMachine()
     {
-        // Use the Assert class to test conditions
+        // Arrange
+
+        GameObject test = new GameObject();
+        AI_StateMachine stateMachine = test.AddComponent<AI_StateMachine>();
+
+        AI_BaseState state = stateMachine.CurrentState;
+
+        // Act
+
+        stateMachine.TransitionTo(stateMachine.ChaseState);
+
+        // Assert
+
+        Assert.That(stateMachine.CurrentState, Is.EqualTo(state));
+
     }
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator PlaymodeTestsWithEnumeratorPasses()
+    [Test]
+    public void TestHealth()
     {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
+        // Assert
+        GameObject test = new GameObject();
+        test.AddComponent<Damageable>();
+        PlayerHealth health = test.AddComponent<PlayerHealth>();
+
+        GameObject killer = new GameObject();
+
+        health.Maxhealth = 3;
+        health.CurrentHealth = health.Maxhealth;
+
+        bool DamageTookEventInvoked = false;
+        health.OnDamageTook += () => DamageTookEventInvoked = true;
+
+        // Act
+
+        health.TakeDamage(killer);
+
+        // Assert
+
+        Assert.That(health.CurrentHealth, Is.EqualTo(health.Maxhealth - 1));
+        Assert.That(DamageTookEventInvoked, Is.True);
+
     }
 }
