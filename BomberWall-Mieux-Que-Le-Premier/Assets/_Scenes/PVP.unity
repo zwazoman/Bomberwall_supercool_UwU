@@ -5841,11 +5841,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5621803986312762117, guid: bf723ffa55511f34e871ebdd5bc30155,
-        type: 3}
-      propertyPath: m_Name
-      value: BombVFXPool
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

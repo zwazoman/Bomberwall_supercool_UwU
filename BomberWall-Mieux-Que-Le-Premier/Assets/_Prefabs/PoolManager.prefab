@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e96f698a34c34fb4eae54c7aaad5eb87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _poolsList:
+  PoolsList:
   - {fileID: 2688905396187527082}
   - {fileID: 6545564512426404890}
   - {fileID: 3870250177619053967}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 2093105216820712476}
   - component: {fileID: 3870250177619053967}
   m_Layer: 0
-  m_Name: BombVFXPool (1)
+  m_Name: BombVFXPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
