@@ -1,79 +1,112 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class PlayerPrefabEditor : EditorWindow
+public class PlayerPrefabEditor : EditorWindow //Custom Window qui reprends beaucoup de principe de UIManager (Manager qui gère le jeu lorsque c'est du PVP)
 {
-    private GameObject _playerPrefab;
-    private Vector2 _scrollPosition;
-    private bool[] _widowsStates; //Chaque entrée du tableau foldoutStates est un booléen qui peut être soit true (fenêtre dépliée) soit false (fenêtre repliée).
-
+    #region Variable
+    private GameObject _iaPrefab;
+    [SerializeField] private int _numberIA;
+    [SerializeField] private List<Transform> _iaSpawn = new List<Transform>();
+    [SerializeField] private GameObject[] _uiPrefabs; // Tableau de préfab UI (J1, J2, J3, J4)
+    [SerializeField] private Transform _canvas; // Référence au panelPlayerLife dans la scène (Canvas parent des UIs)
+    #endregion
+    #region CréationWindow
     [MenuItem("Window/Player Prefab Editor")]
     public static void ShowWindow()
     {
         GetWindow<PlayerPrefabEditor>("Player Prefab Editor");
     }
+    #endregion
 
     private void OnGUI()
     {
         // Styles
-        GUIStyle VisuelTitre = new GUIStyle(EditorStyles.boldLabel) //Mise en forme titre
+        GUIStyle VisuelTitre = new GUIStyle(EditorStyles.boldLabel)
         {
             fontSize = 20,
             alignment = TextAnchor.MiddleCenter,
             normal = { textColor = Color.white }
         };
 
-        GUIStyle VisuelBox = new GUIStyle(GUI.skin.box) //Mise en forme des Box
-        {
-            normal = { background = null }
-        };
-
-//----------------------------------------Contents (Cas ou 0 préfab choisi)-------------------------------------------------------------------------------------------
         GUILayout.Label("Player Prefab Editor", VisuelTitre);
         GUILayout.Space(20);
 
-        _playerPrefab = (GameObject)EditorGUILayout.ObjectField("Player Prefab", _playerPrefab, typeof(GameObject), false);
-        GUILayout.Space(10);
+//------------------------------------------------------------Création de variable dans la window--------------------------------------------------------------------------
 
-        if (_playerPrefab == null)
+        _iaPrefab = (GameObject)EditorGUILayout.ObjectField("IA Prefab", _iaPrefab, typeof(GameObject), false);
+
+        _numberIA = EditorGUILayout.IntField("Nombre d'IA sur le terrain", _numberIA);
+
+
+        SerializedObject serializedObject = new SerializedObject(this); //Déclaration pour les futurs listes
+
+        //Liste
+        SerializedProperty spawnList = serializedObject.FindProperty("_iaSpawn");
+        EditorGUILayout.PropertyField(spawnList, true);
+
+        EditorGUILayout.Space();
+
+        _canvas = (Transform)EditorGUILayout.ObjectField("Canvas (UI Parent)", _canvas, typeof(Transform), true);
+
+        //Liste
+        SerializedProperty uiArray = serializedObject.FindProperty("_uiPrefabs");
+        EditorGUILayout.PropertyField(uiArray, true);
+
+        serializedObject.ApplyModifiedProperties();//Save
+
+        GUILayout.Space(20);
+
+//---------------------------------------------------Contents (Cas où les variables sont mal set)---------------------------------------------------------------------------------
+
+        if (_iaPrefab == null)
         {
-            EditorGUILayout.HelpBox("Un préfab est néccéssaire pour pouvoir continuer", MessageType.Info);
+            EditorGUILayout.HelpBox("Un prefab d'IA est nécessaire pour continuer.", MessageType.Warning);
             return;
         }
-//-----------------------------------------Contents (Préfab choisi)---------------------------------------------------------------------------------------------------
 
-        MonoBehaviour[] scripts = _playerPrefab.GetComponents<MonoBehaviour>(); //Je ne veux afficher que les scripts
-
-        if (_widowsStates == null || _widowsStates.Length != scripts.Length)
-            _widowsStates = new bool[scripts.Length];
-
-        _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition, GUILayout.Height(400)); //On fait des windows
-
-        for (int i = 0; i < scripts.Length; i++) // Trie parmi les Components
+        if (_numberIA <= 0 && _numberIA >= 4|| _iaSpawn.Count == 0)
         {
-            MonoBehaviour script = scripts[i];
-            if (script == null) continue;
-
-            _widowsStates[i] = EditorGUILayout.Foldout(_widowsStates[i], script.GetType().Name);
-
-            if (_widowsStates[i])
-            {
-                SerializedObject serializedScript = new SerializedObject(script); // Sérialisation du script
-                SerializedProperty property = serializedScript.GetIterator();
-                property.NextVisible(true);
-
-                while (property.NextVisible(false))
-                {
-                    if (property.name != "m_Script")
-                        EditorGUILayout.PropertyField(property, true);
-                }
-                serializedScript.ApplyModifiedProperties();
-            }
+            EditorGUILayout.HelpBox("Pas ou trop d'IA, le max c'est 4, ils leurs faut également un transform pour spawn", MessageType.Warning);
+            return;
         }
 
-        EditorGUILayout.EndScrollView();
+        if (_canvas == null)
+        {
+            EditorGUILayout.HelpBox("Référence au Canvas manquante.", MessageType.Warning);
+            return;
+        }
+//--------------------------------------------------Contents (Systeme d'instance)----------------------------------------------------------------------
 
-        if (GUILayout.Button("Sauvegarder les changements")) //Si on appuie
-            Debug.Log("C'est save");
+        // Bouton pour entrer en mode jeu
+        if (GUILayout.Button("Jouer la Scène"))
+        {
+            InstantiateIAs();
+            EditorApplication.EnterPlaymode();
+        }
+    }
+
+    private void InstantiateIAs()
+    {
+        //Script UIManager qui fait pareil pour la scene PVP
+
+        int count = Mathf.Min(_numberIA, _iaSpawn.Count); //count sert à ne pas crée trop d'ia (ex : 2 IA demandé pour 1 SpawnPoint)
+
+        for (int i = 0; i < count; i++)
+        {
+            Transform spawnPoint = _iaSpawn[i];
+
+            GameObject iaInstance = Instantiate(_iaPrefab.gameObject, spawnPoint.position, spawnPoint.rotation); //?
+
+            if (i < _uiPrefabs.Length && _uiPrefabs[i] != null)
+            {
+                GameObject uiInstance = Instantiate(_uiPrefabs[i], _canvas);
+                PlayerAttributeUI playerUI = iaInstance.GetComponent<PlayerAttributeUI>();
+                if (playerUI != null)
+                {
+                    playerUI.AssignUI(uiInstance);
+                }
+            }
+        }
     }
 }
