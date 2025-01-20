@@ -27,6 +27,9 @@ public class AI_KamikazeState : AI_BaseState
     public override void OnExit()
     {
         StateMachine.Sensor.OnBombNear -= EnterFlea;
+        StateMachine.Sensor.OnBombFar -= EnterChase;
+
+        StateMachine.Controller.OnTargetReached += HitBomb;
     }
 
     public override void Update()
