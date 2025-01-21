@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,6 +45,8 @@ public class Ai_Sensor : MonoBehaviour
 
     public Transform GetClosestPickup()
     {
+        if(God.Instance._bombPickups.Count == 0) return null;
+
         Transform closest = God.Instance._bombPickups[0];
         foreach(Transform pickup in God.Instance._bombPickups)
         {

@@ -32,6 +32,7 @@ public class BombHandler : MonoBehaviour
     /// </summary>
     public void Pickup()
     {
+        print("Pickup");
         BombsPossessedCount++;
         OnBombPickUp?.Invoke();
     }

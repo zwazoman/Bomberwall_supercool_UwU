@@ -7,14 +7,14 @@ public class AI_StateMachine : MonoBehaviour
 
     public AI_BaseState CurrentState { get; private set; }
 
-    public AI_ReflexionState ChaseState;
     public AI_FleaState FleaState;
     public AI_ReloadState ReloadState;
     public AI_KamikazeState KamikazeState;
+    public AI_ChaseState ChaseState;
 
     private void Start()
     {
-        ChaseState = new AI_ReflexionState();
+        ChaseState = new AI_ChaseState();
         ChaseState.StateMachine = this;
 
         FleaState = new AI_FleaState();
@@ -27,13 +27,16 @@ public class AI_StateMachine : MonoBehaviour
         KamikazeState = new AI_KamikazeState();
         KamikazeState.StateMachine = this;
 
-        CurrentState = ReloadState;
+        TransitionTo(ReloadState);
     }
 
     public void TransitionTo(AI_BaseState state)
     {
-        if (state == CurrentState) return;
-        CurrentState.OnExit();
+        if(CurrentState != null)
+        {
+            if (state == CurrentState) return;
+            CurrentState.OnExit();
+        }
 
         CurrentState = state;
         CurrentState.OnEnter();

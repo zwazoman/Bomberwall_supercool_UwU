@@ -6,9 +6,13 @@ public class AI_ChaseState : AI_BaseState
 {
     public GameObject Player;
 
+    float _timer = 0;
+
     public override void OnEnter()
     {
         StateMachine.Sensor.OnPlayerInRange += Attack;
+
+        EnterReload();
     }
 
     void Chase()
@@ -37,6 +41,11 @@ public class AI_ChaseState : AI_BaseState
 
     public override void Update()
     {
-        throw new System.NotImplementedException();
+        _timer += Time.deltaTime;
+        if(_timer > 0.2f)
+        {
+            Chase();
+            _timer = 0;
+        }
     }
 }
