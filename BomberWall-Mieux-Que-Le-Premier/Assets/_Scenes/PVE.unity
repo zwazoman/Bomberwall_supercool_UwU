@@ -3934,7 +3934,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 672d6490a075a90478306cf5daba427f, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 9c6a6cbd77e4bf9499407d59a650f220, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &1483246980
 Transform:
@@ -35428,7 +35428,6 @@ MonoBehaviour:
   Maxhealth: 3
   _deathPushForce: 50
   _deathTorqueForce: 0
-  _test: {fileID: 0}
 --- !u!4 &6956954854320838517
 Transform:
   m_ObjectHideFlags: 0
@@ -35826,6 +35825,7 @@ GameObject:
   - component: {fileID: 279103273930857094}
   - component: {fileID: 5103164634334948427}
   - component: {fileID: 8168836633348956967}
+  - component: {fileID: 8168836633348956968}
   m_Layer: 6
   m_Name: AI
   m_TagString: Untagged
@@ -35846,6 +35846,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 5103164634334948427}
+--- !u!114 &8168836633348956968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8168836633348956966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2a6f047ee34a274b83877a73c303dd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ParticleSystem: {fileID: 6465868810302027322}
 --- !u!1 &8225476652739807880
 GameObject:
   m_ObjectHideFlags: 0
@@ -35895,7 +35908,6 @@ MonoBehaviour:
   Maxhealth: 3
   _deathPushForce: 50
   _deathTorqueForce: 0
-  _test: {fileID: 6465868810302027322}
 --- !u!1 &8423368360343220734
 GameObject:
   m_ObjectHideFlags: 0

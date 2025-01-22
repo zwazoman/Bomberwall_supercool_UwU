@@ -10,7 +10,6 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] float _deathPushForce;
     [SerializeField] float _deathTorqueForce;
-    [SerializeField] private ParticleSystem _test;
 
     Damageable _damageable;
     Rigidbody _rb;
@@ -36,7 +35,7 @@ public class PlayerHealth : MonoBehaviour
         CurrentHealth--;
         //juice
         OnDamageTook?.Invoke();
-        //_test.Play(); ça faut le faire dans un script a part (genre visuals et le relier a l'event
+
         if (CurrentHealth == 0) Die(killer);
     }
 

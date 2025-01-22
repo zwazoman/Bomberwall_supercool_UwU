@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(PlayerMove))]
-public class CustomEditorPlayerMove : Editor
+public class CustomEditorMove : Editor
 {
     private MeshRenderer m_Renderer;
 

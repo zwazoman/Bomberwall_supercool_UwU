@@ -4921,6 +4921,7 @@ GameObject:
   - component: {fileID: 7034659800296572641}
   - component: {fileID: 7113738847864256580}
   - component: {fileID: 7425325084400908991}
+  - component: {fileID: 2415102969510515240}
   m_Layer: 6
   m_Name: PlAyEr
   m_TagString: Untagged
@@ -5054,7 +5055,6 @@ MonoBehaviour:
   Maxhealth: 3
   _deathPushForce: 50
   _deathTorqueForce: 0
-  _test: {fileID: 576409209122768423}
 --- !u!114 &2890810434299630216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5351,6 +5351,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bdfcc1d50b97043930ad11359c1433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2415102969510515240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2319394959383672701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2a6f047ee34a274b83877a73c303dd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ParticleSystem: {fileID: 576409209122768423}
 --- !u!1 &2491972943311563564
 GameObject:
   m_ObjectHideFlags: 0
