@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class GameStart : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _infoText;
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private PlayerInputManager _playerManager;
+    public event Action GameStarted;
 
     public static GameStart Instance;
 
@@ -32,5 +34,6 @@ public class GameStart : MonoBehaviour
             await Task.Delay(delay);
         }
         _timerText.gameObject.SetActive(false);
+        GameStarted.Invoke();
     }
 }

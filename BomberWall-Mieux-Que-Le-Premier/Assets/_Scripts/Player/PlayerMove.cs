@@ -34,10 +34,10 @@ public class PlayerMove : MonoBehaviour
     private float _accelerationTimer;
 
     [HideInInspector] public Vector2 MoveInput;
-    #endregion
     public bool CanMove;
     public event Action OnStartMoving;
     public event Action OnStopMoving;
+    #endregion
 
     private void FixedUpdate()
     {
