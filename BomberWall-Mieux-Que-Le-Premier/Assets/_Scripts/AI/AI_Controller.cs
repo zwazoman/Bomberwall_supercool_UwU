@@ -42,12 +42,13 @@ public class AI_Controller : MonoBehaviour
 
     public void LookTo(Vector3 destination)
     {
-        transform.forward = (destination - transform.position).normalized;
+        transform.LookAt(destination, Vector3.up);
     }
 
     public void StopMoving()
     {
         _agent.isStopped = true;
+        _agent.velocity = Vector3.zero;
     }
 
     public void RestartMoving()

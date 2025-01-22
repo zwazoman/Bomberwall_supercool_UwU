@@ -8,11 +8,14 @@ public class Ai_Sensor : MonoBehaviour
     public event Action<GameObject> OnBombNear;
     public event Action<GameObject> OnBombVeryNear;
     public event Action OnBombFar;
-    public event Action OnPlayerInRange;
+    public event Action OnPlayerNear;
+
+    [HideInInspector] public bool PlayerNear = false;
 
     [Header("Parameters")]
     [SerializeField] float _bombDetectionrange = 1;
     [SerializeField] float _playerDetectionRange = 1;
+    [SerializeField] float _kamikazeRangeDivider = 1;
     [SerializeField] LayerMask _sensorMask;
 
     PlayerHealth _health;
@@ -28,18 +31,22 @@ public class Ai_Sensor : MonoBehaviour
 
     private void Update()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, _bombDetectionrange, _sensorMask);
-        foreach (var item in hits)
+        foreach (Collider _coll in Physics.OverlapSphere(transform.position, _playerDetectionRange, _sensorMask))
         {
-            if(item.gameObject.TryGetComponent<Bomb>(out Bomb bomb))
+            float distanceToObject = (_coll.transform.position - transform.position).magnitude;
+
+            if(_coll.gameObject.TryGetComponent<BombHandler>(out BombHandler bombHandler) && _coll.gameObject != gameObject)
             {
-                float bombDistance = (item.transform.position - transform.position).magnitude;
-                if (bombDistance <= _bombDetectionrange / 2) OnBombVeryNear?.Invoke(bomb.gameObject); else OnBombNear?.Invoke(bomb.gameObject);
-            }
-            else
+                PlayerNear = true;
+                OnPlayerNear?.Invoke();
+
+            } else PlayerNear = false;
+
+
+            if (_coll.gameObject.TryGetComponent<Bomb>(out Bomb bomb) && distanceToObject <= _bombDetectionrange && bomb.Timer >= 1.5f)
             {
-                OnBombFar?.Invoke();
-            }
+                if (distanceToObject <= _bombDetectionrange / _kamikazeRangeDivider) OnBombVeryNear?.Invoke(bomb.gameObject); else OnBombNear?.Invoke(bomb.gameObject);
+            } else OnBombFar?.Invoke();
         }
     }
 
@@ -73,6 +80,13 @@ public class Ai_Sensor : MonoBehaviour
             }
         }
         return closest;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, _bombDetectionrange);
+        Gizmos.DrawWireSphere(transform.position, _bombDetectionrange / _kamikazeRangeDivider);
+        Gizmos.DrawWireSphere(transform.position, _playerDetectionRange);
     }
 
 }

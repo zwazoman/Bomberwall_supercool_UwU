@@ -1,3 +1,4 @@
+using Codice.CM.Client.Differences.Merge;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
@@ -8,39 +9,57 @@ public class AI_ChaseState : AI_BaseState
 
     float _timer = 0;
 
+    bool _isAttacking = false;
+
     public override void OnEnter()
     {
-        StateMachine.Sensor.OnPlayerInRange += Attack;
+        StateMachine.Sensor.OnPlayerNear += Attack;
+        StateMachine.Sensor.OnBombNear += EnterFlea;
 
-        EnterReload();
+        Chase();
     }
 
     void Chase()
     {
-        StateMachine.Controller.MoveTo(StateMachine.Sensor.GetClosestPlayer().transform.position);
+        Player = StateMachine.Sensor.GetClosestPlayer();
+        StateMachine.Controller.MoveTo(Player.transform.position);
     }
 
     async void Attack()
     {
-        // se tourne vers le joueur et balance un nombre random de bombes parmis celles qu'il possède (il doit attendre entre les lancers pour les anims)
+        if (_isAttacking) return;
+
+        Debug.Log("Attack");
+        _isAttacking = true;
+        StateMachine.Controller.StopMoving();
+
         int BombsToThrow = Random.Range(1,StateMachine.Controller.Bomb.BombsPossessedCount);
         for(int i = 0; i < BombsToThrow; i++)
         {
+            Debug.Log("ThrowBomb");
             StateMachine.Controller.LookTo(Player.transform.position);
             StateMachine.Controller.Bomb.Equip();
             await Task.Delay(500);
             StateMachine.Controller.Bomb.Throw();
+            await Task.Delay(500);
         }
+
+        StateMachine.Controller.RestartMoving();
+        _isAttacking = false;
+
         EnterReload();
     }
 
     public override void OnExit()
     {
-        StateMachine.Sensor.OnPlayerInRange -= Attack;
+        StateMachine.Sensor.OnPlayerNear -= Attack;
+        StateMachine.Sensor.OnBombNear -= EnterFlea;
     }
 
     public override void Update()
     {
+        if (_isAttacking) return;
+
         _timer += Time.deltaTime;
         if(_timer > 0.2f)
         {

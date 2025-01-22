@@ -38,7 +38,7 @@ public class PlayerVisuals : MonoBehaviour
 
     void Hold()
     {
-        _animator.SetBool("HasBombEquipped", _main.Bomb.HasBombsEquipped);
+        _animator.SetBool("HasBombEquipped", _bombHandler.HasBombsEquipped);
     }
 
     void Walk()

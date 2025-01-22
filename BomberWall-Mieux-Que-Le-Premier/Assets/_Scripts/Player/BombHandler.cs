@@ -25,7 +25,7 @@ public class BombHandler : MonoBehaviour
     GameObject _currentBombEquipped;
 
     public bool HasBombsEquipped = false;
-    public int BombsPossessedCount { get; private set; } = 10;
+    public int BombsPossessedCount { get; private set; }
 
     /// <summary>
     /// bombe ramassée
@@ -103,6 +103,8 @@ public class BombHandler : MonoBehaviour
     /// </summary>
     public void Throw()
     {
+        if (!HasBombsEquipped) return;
+
         BombDropped();
         Vector3 throwVector = (transform.forward * _bombThrowHorizontalForce) + (Vector3.up * _bombThrowVerticalForce);
         _currentBombEquipped.GetComponent<Bomb>().Push(throwVector);

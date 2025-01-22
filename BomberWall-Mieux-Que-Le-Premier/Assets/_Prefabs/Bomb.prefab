@@ -14370,8 +14370,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae0f95d9dfd7a6149a0790801dacafec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lifeTime: 5
-  _explosionRadius: 3.5
+  Thrower: {fileID: 0}
+  _lifeTime: 3.5
+  _explosionRadius: 4.2
   _explosionMask:
     serializedVersion: 2
     m_Bits: 448

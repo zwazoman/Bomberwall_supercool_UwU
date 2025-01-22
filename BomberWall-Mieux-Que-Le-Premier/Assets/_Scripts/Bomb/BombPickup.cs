@@ -37,12 +37,10 @@ public class BombPickup : MonoBehaviour,IPoolable
     {
         if (other.gameObject.TryGetComponent<BombHandler>(out BombHandler bombHandler))
         {
-            print(God.Instance.BombPickups.Count);
             if (God.Instance.BombPickups.Contains(transform))
             {
                 God.Instance.BombPickups.Remove(transform);
             }
-            print(God.Instance.BombPickups.Count);
             bombHandler.Pickup();
             ReturnToPool();
         }
