@@ -81,12 +81,12 @@ public class PlayerPrefabEditor : EditorWindow //Custom Window qui reprends beau
         // Bouton pour entrer en mode jeu
         if (GUILayout.Button("Jouer la Scène"))
         {
-            InstantiateIAs();
+            InstantiateIA();
             EditorApplication.EnterPlaymode();
         }
     }
 
-    private void InstantiateIAs()
+    private void InstantiateIA()
     {
         //Script UIManager qui fait pareil pour la scene PVP
 
