@@ -17,9 +17,7 @@ public class AI_ReloadState : AI_BaseState
     async void Reload()
     {
         await Task.Delay(1);
-        Debug.Log("reload");
-        Debug.Log(God.Instance._bombPickups.Count);
-        if(God.Instance._bombPickups.Count == 0 && StateMachine.Controller.Bomb.BombsPossessedCount > 0)
+        if(God.Instance.BombPickups.Count == 0 && StateMachine.Controller.Bomb.BombsPossessedCount > 0)
         {
             EnterChase();
         }
@@ -35,7 +33,7 @@ public class AI_ReloadState : AI_BaseState
         if(UnityEngine.Random.value < factor || StateMachine.Controller.Bomb.BombsPossessedCount == God.Instance.StartPickupCount)
         {
             Debug.Log("Chase");
-            EnterChase() ;
+            EnterChase();
         }
         else
         {
@@ -53,10 +51,10 @@ public class AI_ReloadState : AI_BaseState
 
     public override void Update()
     {
-        if (_closestPickup == null)
-        {
-            Debug.Log("Bomb Taken");
-            Reload();
-        }
+        //if (_closestPickup == null)
+        //{
+        //    Debug.Log("Bomb Taken");
+        //    Reload();
+        //}
     }
 }

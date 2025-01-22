@@ -45,14 +45,14 @@ public class Ai_Sensor : MonoBehaviour
 
     public Transform GetClosestPickup()
     {
-        if(God.Instance._bombPickups.Count == 0) return null;
+        if(God.Instance.BombPickups.Count == 0) return null;
 
-        Transform closest = God.Instance._bombPickups[0];
-        foreach(Transform pickup in God.Instance._bombPickups)
+        Transform closest = God.Instance.BombPickups[0];
+        foreach(Transform pickup in God.Instance.BombPickups)
         {
             Vector3 playerToClosest = closest.position - transform.position;
             Vector3 playerToPickup = pickup.position - transform.position;
-            if(playerToPickup.sqrMagnitude < playerToClosest.sqrMagnitude)
+            if(playerToPickup.sqrMagnitude <= playerToClosest.sqrMagnitude)
             {
                 closest = pickup;
             }

@@ -27,7 +27,7 @@ public class God : MonoBehaviour
     [SerializeField] public int StartPickupCount;
     [SerializeField] public List<Transform> _bombSpawns = new List<Transform>();
 
-    [HideInInspector] public List<Transform> _bombPickups = new List<Transform>();
+    [HideInInspector] public List<Transform> BombPickups = new List<Transform>();
 
     public void Start()
     {
@@ -58,8 +58,8 @@ public class God : MonoBehaviour
 
     void SpawnBombPickup(Transform t)
     {
-        _bombPickups.Add(t);
-        GameObject bomb = PoolManager.Instance.AccessPool(Pools.BombPickup).TakeFromPool(t.position, Quaternion.identity);
-        bomb.SetActive(true);
+        GameObject bombPickup = PoolManager.Instance.AccessPool(Pools.BombPickup).TakeFromPool(t.position, Quaternion.identity);
+        BombPickups.Add(bombPickup.transform);
+        bombPickup.SetActive(true);
     }
 }
