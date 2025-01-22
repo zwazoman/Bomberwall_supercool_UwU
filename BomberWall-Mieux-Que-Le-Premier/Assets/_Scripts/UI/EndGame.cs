@@ -26,6 +26,7 @@ public class EndGame : MonoBehaviour
 
     public async void VerificationVictory()
     {
+        print("verif");
         if (UIManager.Instance.Players.Count <= 1)
         {
             _textVictoire.gameObject.SetActive(true);

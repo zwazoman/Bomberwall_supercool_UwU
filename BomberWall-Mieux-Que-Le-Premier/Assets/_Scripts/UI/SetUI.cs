@@ -20,8 +20,8 @@ public class SetUI : MonoBehaviour
 
     private float _interpolateColor = 0f;
     private bool _fadingToRed = true; 
-
-    [HideInInspector] public GameObject Player;
+    
+    public GameObject Player;
 
     private void Start()
     {

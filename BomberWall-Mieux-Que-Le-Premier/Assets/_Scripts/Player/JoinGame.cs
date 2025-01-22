@@ -16,6 +16,12 @@ public class JoinGame : MonoBehaviour
             _gameStarted = true;
             GameStart.Instance.Demarrage();
             await Task.Delay(3200); //Fin du 3,2,1,GO
+            if (UIManager.Instance.Players[0].GetComponent<AI_StateMachine>())
+            {
+                UIManager.Instance.Players[1].GetComponent<PlayerMove>().CanMove = true;
+                AI_StartGame.Instance.StartGameAI();
+                return;
+            }
             foreach (GameObject player in UIManager.Instance.Players)
             {
                 player.TryGetComponent<PlayerMove>(out _playerMove);

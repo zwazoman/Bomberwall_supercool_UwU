@@ -42,7 +42,6 @@ public class BombHandler : MonoBehaviour
     /// </summary>
     public void Equip()
     {
-        print("hm?");
         if (HasBombsEquipped)
         {
             Drop();
