@@ -22,7 +22,7 @@ public class AI_ChaseState : AI_BaseState
     void Chase()
     {
         Player = StateMachine.Sensor.GetClosestPlayer();
-        StateMachine.Controller.MoveTo(Player.transform.position);
+        if(Player != null ) StateMachine.Controller.MoveTo(Player.transform.position);
     }
 
     async void Attack()
@@ -40,7 +40,14 @@ public class AI_ChaseState : AI_BaseState
             StateMachine.Controller.LookTo(Player.transform.position);
             StateMachine.Controller.Bomb.Equip();
             await Task.Delay(500);
-            StateMachine.Controller.Bomb.Throw();
+            if((Player.transform.position - StateMachine.transform.position).magnitude < StateMachine.Sensor.BombDetectionrange)
+            {
+                StateMachine.Controller.Bomb.Drop();
+            }
+            else
+            {
+                StateMachine.Controller.Bomb.Throw();
+            }
             await Task.Delay(500);
         }
 

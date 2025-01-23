@@ -73,6 +73,8 @@ public class Ai_Sensor : MonoBehaviour
 
     public GameObject GetClosestPlayer()
     {
+        if(UIManager.Instance.Players.Count == 0) return null;
+
         List<GameObject> goodPlayerList = new List<GameObject>();
         goodPlayerList = UIManager.Instance.Players;
 

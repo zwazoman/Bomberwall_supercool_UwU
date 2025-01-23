@@ -19,7 +19,6 @@ public class PoolObject : MonoBehaviour
     public void PushToPool()
     {
         OnPushedToPool?.Invoke();
-        print(OriginPool);
         OriginPool.ReturnToPool(gameObject);
     }
 }
