@@ -21,7 +21,7 @@ public class AI_ReloadState : AI_BaseState
     void Roll()
     {
         float factor = 0.25f + StateMachine.Controller.Bomb.BombsPossessedCount / 10;
-        if ((UnityEngine.Random.value < factor || God.Instance.BombPickups.Count == 0) && StateMachine.Controller.Bomb.BombsPossessedCount > 0)
+        if (UnityEngine.Random.value < factor && StateMachine.Controller.Bomb.BombsPossessedCount > 0)
         {
             EnterChase();
         }
@@ -42,14 +42,24 @@ public class AI_ReloadState : AI_BaseState
 
     public override void Update()
     {
-        if (StateMachine.Sensor.PlayerNear && StateMachine.Controller.Bomb.BombsPossessedCount > 0) EnterChase();
-
-        _timer += Time.deltaTime;
-        if (_timer > 0.2f)
+        if ((StateMachine.Sensor.PlayerNear || God.Instance.BombPickups.Count == 0) && StateMachine.Controller.Bomb.BombsPossessedCount > 0)
         {
-            _closestPickup = StateMachine.Sensor.GetClosestPickup().gameObject;
-            StateMachine.Controller.MoveTo(_closestPickup.transform.position);
+            EnterChase();
         }
+        else if (God.Instance.BombPickups.Count == 0)
+        {
+            return;
+        }
+        else
+        {
+            _timer += Time.deltaTime;
+            if (_timer > 0.2f)
+            {
+                _closestPickup = StateMachine.Sensor.GetClosestPickup().gameObject;
+                StateMachine.Controller.MoveTo(_closestPickup.transform.position);
+            }
+        }
+
 
         //if (_closestPickup == null)
         //{

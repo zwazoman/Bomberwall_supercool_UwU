@@ -42,7 +42,9 @@ public class AI_Controller : MonoBehaviour
 
     public void LookTo(Vector3 destination)
     {
-        transform.LookAt(destination, Vector3.up);
+        //transform.LookAt(destination, Vector3.up);
+        Quaternion rotation = Quaternion.LookRotation(destination - transform.position);
+        transform.rotation = rotation;
     }
 
     public void StopMoving()

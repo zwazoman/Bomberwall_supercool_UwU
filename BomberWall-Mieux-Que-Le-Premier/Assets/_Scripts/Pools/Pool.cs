@@ -61,10 +61,7 @@ public class Pool : MonoBehaviour
             print("empty pool case");
             pooledObject = AddNewObjectToPool();
         }
-        else
-        {
-            pooledObject = _pool.Dequeue();
-        }
+        pooledObject = _pool.Dequeue();
         pooledObject.transform.position = pos;
         pooledObject.transform.rotation = rot;
         pooledObject.SetActive(true);

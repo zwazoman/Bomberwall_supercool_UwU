@@ -35,12 +35,11 @@ public class Bomb : MonoBehaviour,IPoolable
 
     public void OnPulledFromPool()
     {
-        print("chien");
+
     }
 
     public void OnPushedToPool()
     {
-        print("singe");
         Timer = 0;
     }
 
@@ -92,8 +91,7 @@ public class Bomb : MonoBehaviour,IPoolable
                 bombHandler.BombDropped();
             }
         }
-        Collider[] hits = Physics.OverlapSphere(transform.position, _explosionRadius, _explosionMask);
-        foreach (Collider col in hits)
+        foreach (Collider col in Physics.OverlapSphere(transform.position, _explosionRadius, _explosionMask))
         {
             if (Physics.Raycast(transform.position, col.transform.position - transform.position, _explosionRadius, LayerMask.GetMask("Wall"))) continue;
             if (col.gameObject.TryGetComponent<Damageable>(out Damageable target))
