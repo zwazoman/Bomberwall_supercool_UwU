@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -41,6 +42,9 @@ public class PlayerHealth : MonoBehaviour
     void Die(GameObject killer)
     {
         print("died");
+
+        if(TryGetComponent(out PlayerMove playerMove)) playerMove.CanMove = false;
+        if(TryGetComponent(out NavMeshAgent agent)) agent.speed = 0;
 
         _rb.constraints = RigidbodyConstraints.None;
         _rb.AddForce(Vector3.up * _deathPushForce, ForceMode.Impulse);
