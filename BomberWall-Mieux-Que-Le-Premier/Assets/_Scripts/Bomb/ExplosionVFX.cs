@@ -18,7 +18,6 @@ public class ExplosionVFX : MonoBehaviour, IPoolable
 
     public async void Boom()
     {
-        print("test");
         GameObject VFX = PoolManager.Instance.AccessPool(Pools.Explosion).TakeFromPool(transform.position, Quaternion.identity);
         VFX.SetActive(true);
         await Task.Delay(1200);

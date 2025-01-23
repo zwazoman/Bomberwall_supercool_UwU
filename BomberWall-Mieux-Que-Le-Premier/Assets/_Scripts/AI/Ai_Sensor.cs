@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Ai_Sensor : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class Ai_Sensor : MonoBehaviour
     [HideInInspector] public bool PlayerNear = false;
 
     [Header("Parameters")]
-    [SerializeField] float _bombDetectionrange = 1;
+    [SerializeField] public float BombDetectionrange = 1;
     [SerializeField] float _playerDetectionRange = 1;
     [SerializeField] float _kamikazeRangeDivider = 1;
     [SerializeField] LayerMask _sensorMask;
@@ -33,6 +34,8 @@ public class Ai_Sensor : MonoBehaviour
     {
         foreach (Collider _coll in Physics.OverlapSphere(transform.position, _playerDetectionRange, _sensorMask))
         {
+            //if (_coll.gameObject == gameObject) return;
+
             float distanceToObject = (_coll.transform.position - transform.position).magnitude;
 
             if(_coll.gameObject.TryGetComponent<BombHandler>(out BombHandler bombHandler) && _coll.gameObject != gameObject)
@@ -43,10 +46,11 @@ public class Ai_Sensor : MonoBehaviour
             } else PlayerNear = false;
 
 
-            if (_coll.gameObject.TryGetComponent<Bomb>(out Bomb bomb) && distanceToObject <= _bombDetectionrange && bomb.Timer >= 1.5f)
+            if (_coll.gameObject.TryGetComponent<Bomb>(out Bomb bomb) && distanceToObject <= BombDetectionrange && bomb.Timer >= 1.5f)
             {
-                if (distanceToObject <= _bombDetectionrange / _kamikazeRangeDivider) OnBombVeryNear?.Invoke(bomb.gameObject); else OnBombNear?.Invoke(bomb.gameObject);
-            } else OnBombFar?.Invoke();
+                OnBombNear?.Invoke(bomb.gameObject);
+                //if (distanceToObject <= BombDetectionrange / _kamikazeRangeDivider) OnBombVeryNear?.Invoke(bomb.gameObject); else OnBombNear?.Invoke(bomb.gameObject);
+            }
         }
     }
 
@@ -69,7 +73,12 @@ public class Ai_Sensor : MonoBehaviour
 
     public GameObject GetClosestPlayer()
     {
-        GameObject closest = UIManager.Instance.Players[0];
+        List<GameObject> goodPlayerList = new List<GameObject>();
+        goodPlayerList = UIManager.Instance.Players;
+
+        goodPlayerList.Remove(gameObject);
+
+        GameObject closest = goodPlayerList[0];
         foreach (GameObject player in UIManager.Instance.Players)
         {
             Vector3 playerToClosest = closest.transform.position - transform.position;
@@ -82,10 +91,19 @@ public class Ai_Sensor : MonoBehaviour
         return closest;
     }
 
+    public Vector3 GetClosestNavmeshPoint(Vector3 destination)
+    {
+        NavMeshHit hit;
+        NavMesh.SamplePosition(destination, out hit, 4,NavMesh.AllAreas);
+
+        return hit.position;
+    }
+
+
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, _bombDetectionrange);
-        Gizmos.DrawWireSphere(transform.position, _bombDetectionrange / _kamikazeRangeDivider);
+        Gizmos.DrawWireSphere(transform.position, BombDetectionrange);
+        Gizmos.DrawWireSphere(transform.position, BombDetectionrange / _kamikazeRangeDivider);
         Gizmos.DrawWireSphere(transform.position, _playerDetectionRange);
     }
 

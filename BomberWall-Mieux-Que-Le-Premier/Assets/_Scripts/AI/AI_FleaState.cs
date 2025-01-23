@@ -1,3 +1,4 @@
+using Codice.CM.Client.Differences.Merge;
 using UnityEngine;
 
 public class AI_FleaState : AI_BaseState
@@ -6,37 +7,46 @@ public class AI_FleaState : AI_BaseState
 
     float _timer;
 
-    Vector3 fleaSpot;
+    Vector3 playerToBomb;
 
     public override void OnEnter()
     {
-        StateMachine.Sensor.OnBombFar += EnterReload;
         //StateMachine.Sensor.OnBombVeryNear += EnterKamikaze;
+
+        playerToBomb = Bomb.transform.position - StateMachine.transform.position;
+        Vector3 fleaSpot = StateMachine.transform.position - playerToBomb;
+
+        FleaTo(StateMachine.Sensor.GetClosestNavmeshPoint(fleaSpot.normalized * 2));
     }
 
-    void Flea()
+    void FleaTo(Vector3 destination)
     {
-        StateMachine.Controller.MoveTo(fleaSpot);
+        Debug.Log("flea to" + destination);
+        StateMachine.Controller.MoveTo(destination);
+    }
 
+    void StopFleaing()
+    {
+        EnterReload();
     }
 
     public override void OnExit()
     {
-        StateMachine.Sensor.OnBombFar -= EnterReload;
         //StateMachine.Sensor.OnBombVeryNear -= EnterKamikaze;
-
-
     }
 
     public override void Update()
     {
-        Vector3 playerToBomb = Bomb.transform.position - StateMachine.transform.position;
-        fleaSpot = StateMachine.transform.position - playerToBomb;
-
         _timer += Time.deltaTime;
         if (_timer > 0.2f)
         {
-            Flea();
+            if(Bomb == null) StopFleaing();
+            else 
+            {
+                playerToBomb = Bomb.transform.position - StateMachine.transform.position;
+
+                if (playerToBomb.magnitude >= StateMachine.Sensor.BombDetectionrange) StopFleaing();
+            }
             _timer = 0;
         }
     }

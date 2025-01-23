@@ -61,7 +61,7 @@ public class AI_ChaseState : AI_BaseState
         if (_isAttacking) return;
 
         _timer += Time.deltaTime;
-        if(_timer > 0.2f)
+        if(_timer > 0.5f)
         {
             Chase();
             _timer = 0;
