@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject[] _uiPrefabs; // Tableau de préfab UI (J1, J2, J3, J4)
     [SerializeField] private CanvasRenderer _canvas; // Référence au panelPlayerLife dans la scène
     [SerializeField] private List<Material> _materialsList = new List<Material>();
-    
+
     public List<GameObject> Players = new List<GameObject>();
 
     public static UIManager Instance;

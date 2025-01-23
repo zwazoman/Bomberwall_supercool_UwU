@@ -40,7 +40,7 @@ public class AI_FleaState : AI_BaseState
         _timer += Time.deltaTime;
         if (_timer > 0.2f)
         {
-            if(Bomb == null) StopFleaing();
+            if (Bomb.activeSelf == false) StopFleaing();
             else 
             {
                 playerToBomb = Bomb.transform.position - StateMachine.transform.position;

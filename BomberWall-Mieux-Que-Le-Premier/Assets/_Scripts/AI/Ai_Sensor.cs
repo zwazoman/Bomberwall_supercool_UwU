@@ -75,14 +75,15 @@ public class Ai_Sensor : MonoBehaviour
     {
         if(UIManager.Instance.Players.Count == 0) return null;
 
-        List<GameObject> goodPlayerList = new List<GameObject>();
-        goodPlayerList = UIManager.Instance.Players;
+        //List<GameObject> goodPlayerList = new List<GameObject>();
+        //goodPlayerList = UIManager.Instance.Players;
 
-        goodPlayerList.Remove(gameObject);
+        //goodPlayerList.Remove(gameObject);
 
-        GameObject closest = goodPlayerList[0];
+        GameObject closest = UIManager.Instance.Players[1];
         foreach (GameObject player in UIManager.Instance.Players)
         {
+            if (player == gameObject) continue;
             Vector3 playerToClosest = closest.transform.position - transform.position;
             Vector3 playerToPickup = player.transform.position - transform.position;
             if (playerToPickup.sqrMagnitude < playerToClosest.sqrMagnitude)
