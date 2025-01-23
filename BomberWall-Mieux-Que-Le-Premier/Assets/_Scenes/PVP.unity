@@ -2561,7 +2561,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press B for join and + for play
+  m_text: Press B for join and select for play
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
@@ -2672,15 +2672,19 @@ MonoBehaviour:
   _playerSpawn:
   - {fileID: 230673189}
   - {fileID: 892964826}
-  - {fileID: 19208238}
   - {fileID: 2038480020}
+  - {fileID: 19208238}
   _uiPrefabs:
   - {fileID: 2249955258302031735, guid: c748c51c68e2f534a9cf91042b452aa0, type: 3}
   - {fileID: 263085990462592147, guid: 3600621576193b0449061f8a4a5bf149, type: 3}
   - {fileID: 8115811879710529009, guid: 98ad80386e1340c4d9413f4fff685499, type: 3}
   - {fileID: 7435860145449614519, guid: f4373d5a4927aba47bdb3b7c126490f1, type: 3}
   _canvas: {fileID: 839381177}
-  _materialsList: []
+  _materialsList:
+  - {fileID: 2100000, guid: e50b7daebbb153245b30ef824622bc62, type: 2}
+  - {fileID: 2100000, guid: a8d34be13663af8468451ad157ad37b4, type: 2}
+  - {fileID: 2100000, guid: 7e904ab26c0ec5e4b96e2cd7a662f282, type: 2}
+  - {fileID: 2100000, guid: 327b19bd6bb92a141a0c914b409c7dac, type: 2}
   Players: []
 --- !u!4 &855894986
 Transform:
