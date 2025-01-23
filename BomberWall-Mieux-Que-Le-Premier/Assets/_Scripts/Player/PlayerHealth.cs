@@ -28,6 +28,8 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         _damageable.OnTakeDamage += TakeDamage;
+
+        AudioManager.Instance.PlaySFXClip(Sounds.Spawn);
     }
 
     public void TakeDamage(GameObject killer)
@@ -36,12 +38,15 @@ public class PlayerHealth : MonoBehaviour
         //juice
         OnDamageTook?.Invoke();
 
+        AudioManager.Instance.PlaySFXClip(Sounds.Damage);
+
         if (CurrentHealth == 0) Die(killer);
     }
 
     void Die(GameObject killer)
     {
         print("died");
+
 
         if(TryGetComponent(out PlayerMove playerMove)) playerMove.CanMove = false;
         if(TryGetComponent(out NavMeshAgent agent)) agent.speed = 0;
@@ -50,6 +55,9 @@ public class PlayerHealth : MonoBehaviour
         _rb.AddForce(Vector3.up * _deathPushForce, ForceMode.Impulse);
         _rb.AddTorque(transform.forward * _deathTorqueForce, ForceMode.Impulse);
         UIManager.Instance.Players.Remove(gameObject);
+
+        AudioManager.Instance.PlaySFXClip(Sounds.Death);
+
         OnDeath?.Invoke();
     }
 }

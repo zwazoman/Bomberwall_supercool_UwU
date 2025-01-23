@@ -83,6 +83,9 @@ public class Bomb : MonoBehaviour,IPoolable
     public void Explode()
     {
         OnBombExplode?.Invoke();
+
+        AudioManager.Instance.PlaySFXClip(Sounds.Explosion);
+
         God.Instance.SummonBombPickup();
         if (transform.parent != null)
         {

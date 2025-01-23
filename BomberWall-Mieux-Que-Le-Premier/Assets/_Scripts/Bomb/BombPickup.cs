@@ -41,6 +41,9 @@ public class BombPickup : MonoBehaviour,IPoolable
             {
                 God.Instance.BombPickups.Remove(transform);
             }
+
+            AudioManager.Instance.PlaySFXClip(Sounds.Spawn);
+
             bombHandler.Pickup();
             ReturnToPool();
         }
