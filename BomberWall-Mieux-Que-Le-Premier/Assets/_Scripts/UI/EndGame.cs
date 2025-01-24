@@ -34,6 +34,8 @@ public class EndGame : MonoBehaviour
             _virtualCamera.gameObject.SetActive(true);
             _virtualCamera.Follow = UIManager.Instance.Players[0].transform;
             _virtualCamera.LookAt = UIManager.Instance.Players[0].transform;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             await Task.Delay(6000);
             SceneManager.LoadScene("Menu");
         }
