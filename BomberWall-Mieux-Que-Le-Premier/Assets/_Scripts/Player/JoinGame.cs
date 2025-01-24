@@ -16,6 +16,8 @@ public class JoinGame : MonoBehaviour
             _gameStarted = true;
             GameStart.Instance.Demarrage();
             await Task.Delay(3200); //Fin du 3,2,1,GO
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             if (UIManager.Instance.Players[0].GetComponent<AI_StateMachine>())
             {
                 UIManager.Instance.Players[1].GetComponent<PlayerMove>().CanMove = true;

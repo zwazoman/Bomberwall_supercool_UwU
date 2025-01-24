@@ -29,6 +29,7 @@ public class EndGame : MonoBehaviour
         print("verif");
         if (UIManager.Instance.Players.Count <= 1)
         {
+            print("gg");
             _textVictoire.gameObject.SetActive(true);
             _virtualCamera.gameObject.SetActive(true);
             _virtualCamera.Follow = UIManager.Instance.Players[0].transform;

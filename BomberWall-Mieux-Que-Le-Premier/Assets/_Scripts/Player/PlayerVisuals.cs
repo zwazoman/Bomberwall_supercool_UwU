@@ -53,7 +53,7 @@ public class PlayerVisuals : MonoBehaviour
 
     void Throw()
     {
-        _animator.SetTrigger("Throw");
+        //_animator.SetTrigger("Throw");
     }
 
     void Hit()
