@@ -13,6 +13,7 @@ public class PoolObject : MonoBehaviour
 
     public void PullFromPool()
     {
+        if (OriginPool == null) print("Y'A UN SOUCIS LA");
         OnPulledFromPool?.Invoke();
     }
 
