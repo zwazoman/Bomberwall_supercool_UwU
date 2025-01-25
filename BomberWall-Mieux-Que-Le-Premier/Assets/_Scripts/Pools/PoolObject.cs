@@ -20,6 +20,7 @@ public class PoolObject : MonoBehaviour
     public void PushToPool()
     {
         OnPushedToPool?.Invoke();
+        if (OriginPool == null) Destroy(gameObject);
         OriginPool.ReturnToPool(gameObject);
     }
 }
